@@ -1,0 +1,988 @@
+[
+    {
+        "id": "bd3113b5d8b002af",
+        "type": "ui_template",
+        "z": "3a7efc5060a54b7b",
+        "group": "03e45c7fc51aa59a",
+        "name": "Nhiệt độ",
+        "order": 1,
+        "width": 2,
+        "height": 1,
+        "format": "<head>\n    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.6.0/font/bootstrap-icons.min.css\">\n    <style>\n        .temp-container {\n            display: flex;\n        }\n\n        .temp-icon {\n            font-size: 60px;\n            color: red;\n            float: right;\n        }\n\n        .temp-text {\n            font-size: 20px;\n            color: black;\n        }\n\n        .temp-value {\n            font-size: 40px;\n            color: black;\n            font-weight: bold;\n        }\n    </style>\n</head>\n\n<body>\n    <div class=\"temp-container\">\n        <i class=\"bi bi-thermometer-half temp-icon\"></i>\n        <span class=\"temperature\">\n        <div class=\"temp-text\">Nhiệt độ</div>\n        <div class=\"temp-value\">\n            <a>{{ msg.payload.temperature }}</a>°C\n        </div>\n    </span>\n    </div>\n</body>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 2180,
+        "y": 780,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "86ac1d7237c07da8",
+        "type": "ui_template",
+        "z": "3a7efc5060a54b7b",
+        "group": "03e45c7fc51aa59a",
+        "name": "Độ ẩm",
+        "order": 2,
+        "width": 2,
+        "height": 1,
+        "format": "<head>\n  <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.6.0/font/bootstrap-icons.min.css\">\n  <style>\n  .humid-container {\n    display: flex;\n  }\n\n  .humid-icon {\n    font-size: 60px;\n    color: lightblue;\n    float: right;\n  }\n\n  .humid-text {\n    font-size: 20px;\n    color: black;\n  }\n\n  .humid-value {\n    font-size: 40px;\n    color: black;\n    font-weight: bold;\n  }\n\n  .humidity {\n    margin-left: 10px;\n  }\n</style>\n</head>\n<body>\n<div class=\"humid-container\">\n  <i class=\"bi bi-droplet-half humid-icon\"></i>\n  <span class=\"humidity\">\n    <div class=\"humid-text\">Độ ẩm</div>\n    <div class=\"humid-value\">\n      <a>{{ msg.payload.humidity }}</a>%\n    </div>\n  </span>\n</div>\n</body>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 2170.555419921875,
+        "y": 840.5555419921875,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d3714dd5672ad030",
+        "type": "ui_template",
+        "z": "3a7efc5060a54b7b",
+        "group": "03e45c7fc51aa59a",
+        "name": "Thời tiết",
+        "order": 3,
+        "width": 2,
+        "height": 2,
+        "format": "<head>\n  <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.6.0/font/bootstrap-icons.min.css\">\n  <style>\n    .weather-text {\n      font-size: 24px;\n      text-align: center;\n    }\n    .weather-icon {\n      font-size: 110px;\n      /* margin: 0 10px; */\n      text-align: center;\n    }\n\n    .cornflowerblue {\n      color: cornflowerblue;\n    }\n\n    .gold {\n      color: gold;\n    }\n  </style>\n</head>\n<body>\n<div class=\"weather-text\">{{msg.payload.text}}</div>\n<div class=\"weather-icon\">\n  <i class=\"bi icon {{msg.payload.icon}} {{msg.payload.color}}\"></i>\n</div>\n</body>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 2180,
+        "y": 900,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "77a38e4640e0432b",
+        "type": "ui_template",
+        "z": "3a7efc5060a54b7b",
+        "group": "03e45c7fc51aa59a",
+        "name": "Mái che",
+        "order": 4,
+        "width": 2,
+        "height": 2,
+        "format": "<head>\n  <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.6.0/font/bootstrap-icons.min.css\">\n  <style>\n    .canopy-text {\n      font-size: 24px;\n    }\n\n    .canopy-value {\n      font-size: 48px;\n      font-weight: bold;\n      margin-top: 24px;\n    }\n  \n    .canopy {\n      text-align: center;\n    }\n  </style>\n\n</head>\n<body>\n  <div class=\"canopy\">\n    <div class=\"canopy-text\">Mái che</div>\n    <div class=\"canopy-value\">{{msg.payload.text}}</div>\n  </div>\n</body>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 2180,
+        "y": 980,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5b691ffd2afe2afb",
+        "type": "switch",
+        "z": "3a7efc5060a54b7b",
+        "name": "SwitchWeatherUI",
+        "property": "payload.isRaining",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "true",
+                "vt": "jsonata"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1830,
+        "y": 900,
+        "wires": [
+            [
+                "c4ce70cd13c19173"
+            ],
+            [
+                "cf8aae2e87f5f167"
+            ]
+        ]
+    },
+    {
+        "id": "cf8aae2e87f5f167",
+        "type": "template",
+        "z": "3a7efc5060a54b7b",
+        "name": "SunUI",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\"icon\":\"bi-cloud-sun\", \"color\":\"gold\", \"text\":\"Không mưa\"}",
+        "output": "json",
+        "x": 2010.555419921875,
+        "y": 920.5555419921875,
+        "wires": [
+            [
+                "d3714dd5672ad030"
+            ]
+        ]
+    },
+    {
+        "id": "c4ce70cd13c19173",
+        "type": "template",
+        "z": "3a7efc5060a54b7b",
+        "name": "RainUI",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\"icon\":\"bi-cloud-rain\", \"color\":\"cornflowerblue\", \"text\":\"Mưa\"}",
+        "output": "json",
+        "x": 2010.555419921875,
+        "y": 880.5555419921875,
+        "wires": [
+            [
+                "d3714dd5672ad030"
+            ]
+        ]
+    },
+    {
+        "id": "f4fe1ee0ef5bfa17",
+        "type": "switch",
+        "z": "3a7efc5060a54b7b",
+        "name": "SwitchCanopyUI",
+        "property": "payload.isOpen",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "true",
+                "vt": "jsonata"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1830,
+        "y": 980,
+        "wires": [
+            [
+                "e8bcdb73ab40ae98"
+            ],
+            [
+                "ca934444fd1465b7"
+            ]
+        ]
+    },
+    {
+        "id": "e8bcdb73ab40ae98",
+        "type": "template",
+        "z": "3a7efc5060a54b7b",
+        "name": "OpenUI",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\"text\":\"MỞ\"}",
+        "output": "json",
+        "x": 2020,
+        "y": 960,
+        "wires": [
+            [
+                "77a38e4640e0432b"
+            ]
+        ]
+    },
+    {
+        "id": "ca934444fd1465b7",
+        "type": "template",
+        "z": "3a7efc5060a54b7b",
+        "name": "CloseUI",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\"text\":\"ĐÓNG\"}",
+        "output": "json",
+        "x": 2020,
+        "y": 1000,
+        "wires": [
+            [
+                "77a38e4640e0432b"
+            ]
+        ]
+    },
+    {
+        "id": "6e0352e78b4bc0eb",
+        "type": "ui_dropdown",
+        "z": "3a7efc5060a54b7b",
+        "name": "AutoModeControl",
+        "label": "",
+        "tooltip": "",
+        "place": "",
+        "group": "f816f812e61c4c7b",
+        "order": 3,
+        "width": "2",
+        "height": 1,
+        "passthru": false,
+        "multiple": false,
+        "options": [
+            {
+                "label": "Bình thường",
+                "value": "1",
+                "type": "str"
+            },
+            {
+                "label": "Phơi đồ",
+                "value": "2",
+                "type": "str"
+            },
+            {
+                "label": "---",
+                "value": "3",
+                "type": "str"
+            }
+        ],
+        "payload": "",
+        "topic": "topic",
+        "topicType": "msg",
+        "className": "automode",
+        "x": 2890,
+        "y": 1060,
+        "wires": [
+            [
+                "84e9696e2d380a81"
+            ]
+        ]
+    },
+    {
+        "id": "bb5385ed91b8e830",
+        "type": "ui_template",
+        "z": "3a7efc5060a54b7b",
+        "group": "f816f812e61c4c7b",
+        "name": "Template",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "format": "<style>\n    .automode {\n        font-size: 24px;\n        color: grey;\n        /* display: none; */\n    }\n    .default-temperature, .default-humidity {\n        font-size: 20px;\n    }\n    .default-temperature .value, .default-humidity .value {\n        font-size: 32px;\n    }\n    \n    .reset-button > button > span {\n        font-size: 22px;\n    }\n\n    .mode-toggle {\n        font-size: 25px;\n    }\n</style>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "global",
+        "className": "",
+        "x": 2180,
+        "y": 700,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "dab363ec93a22863",
+        "type": "ui_switch",
+        "z": "3a7efc5060a54b7b",
+        "name": "",
+        "label": "Bật chế độ tự động",
+        "tooltip": "",
+        "group": "f816f812e61c4c7b",
+        "order": 5,
+        "width": "4",
+        "height": "1",
+        "passthru": false,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "auto",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "manual",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "mode-toggle",
+        "x": 2890,
+        "y": 1200,
+        "wires": [
+            [
+                "84e9696e2d380a81"
+            ]
+        ]
+    },
+    {
+        "id": "fb13f06e6161d91b",
+        "type": "ui_numeric",
+        "z": "3a7efc5060a54b7b",
+        "name": "",
+        "label": "Nhiệt độ mở mái che",
+        "tooltip": "",
+        "group": "fb0d18da8272a13c",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "wrap": false,
+        "passthru": false,
+        "topic": "topic",
+        "topicType": "msg",
+        "format": "{{value}}°C",
+        "min": 0,
+        "max": "100",
+        "step": 1,
+        "className": "default-temperature",
+        "x": 2140,
+        "y": 1380,
+        "wires": [
+            [
+                "56bad15efe186acc"
+            ]
+        ]
+    },
+    {
+        "id": "cb5e025cb17c25d5",
+        "type": "ui_numeric",
+        "z": "3a7efc5060a54b7b",
+        "name": "",
+        "label": "Độ ẩm báo động",
+        "tooltip": "",
+        "group": "fb0d18da8272a13c",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "wrap": false,
+        "passthru": false,
+        "topic": "topic",
+        "topicType": "msg",
+        "format": "{{value}}%",
+        "min": 0,
+        "max": "100",
+        "step": 1,
+        "className": "default-humidity",
+        "x": 2130,
+        "y": 1420,
+        "wires": [
+            [
+                "72ce9cd15b56eb5f"
+            ]
+        ]
+    },
+    {
+        "id": "762a85e67c06d87e",
+        "type": "template",
+        "z": "3a7efc5060a54b7b",
+        "name": "GetDefaultTemperature",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{{payload.defaultTemperature}}",
+        "output": "str",
+        "x": 1850,
+        "y": 1380,
+        "wires": [
+            [
+                "fb13f06e6161d91b"
+            ]
+        ]
+    },
+    {
+        "id": "37bf7979e61f00cb",
+        "type": "template",
+        "z": "3a7efc5060a54b7b",
+        "name": "GetDefaultHumidity",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{{payload.defaultHumidity}}",
+        "output": "str",
+        "x": 1830,
+        "y": 1420,
+        "wires": [
+            [
+                "cb5e025cb17c25d5"
+            ]
+        ]
+    },
+    {
+        "id": "f33580691e96560e",
+        "type": "switch",
+        "z": "3a7efc5060a54b7b",
+        "name": "SwitchMode",
+        "property": "payload.mode",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "else"
+            },
+            {
+                "t": "eq",
+                "v": "3",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1810,
+        "y": 1140,
+        "wires": [
+            [
+                "9c5744b9c37a08dc"
+            ],
+            [
+                "45cd2758c0eb92b7"
+            ]
+        ]
+    },
+    {
+        "id": "9467f773e738750d",
+        "type": "template",
+        "z": "3a7efc5060a54b7b",
+        "name": "GetAutoMode",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{{payload.mode}}",
+        "output": "str",
+        "x": 2420,
+        "y": 1060,
+        "wires": [
+            [
+                "6e0352e78b4bc0eb",
+                "063e67fd634c33c1"
+            ]
+        ]
+    },
+    {
+        "id": "9c2842436740e989",
+        "type": "ui_button",
+        "z": "3a7efc5060a54b7b",
+        "name": "",
+        "group": "fb0d18da8272a13c",
+        "order": 3,
+        "width": 4,
+        "height": "1",
+        "passthru": false,
+        "label": "Trở về cài đặt mặc định",
+        "tooltip": "Xóa cài đặt hiện tại và trở về cài đặt mặc định",
+        "color": "",
+        "bgcolor": "",
+        "className": "reset-button",
+        "icon": "",
+        "payload": "0",
+        "payloadType": "num",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 2150,
+        "y": 1460,
+        "wires": [
+            [
+                "46a67d8a9011e921"
+            ]
+        ]
+    },
+    {
+        "id": "9c5744b9c37a08dc",
+        "type": "template",
+        "z": "3a7efc5060a54b7b",
+        "name": "SetModeAndText",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\"mode\":{{payload.mode}}, \"text\":\"TỰ ĐỘNG\", \"switchButton\":true, \"switchText\":\"Bật\", \"isOpen\":{{payload.isOpen}}}",
+        "output": "json",
+        "x": 2050.555419921875,
+        "y": 1080.5555419921875,
+        "wires": [
+            [
+                "20eece80988d9642",
+                "283d0729bbd98054",
+                "46bb877ce725dfc0",
+                "2aa52156ac72744d",
+                "9467f773e738750d",
+                "2949949e20277d29"
+            ]
+        ]
+    },
+    {
+        "id": "45cd2758c0eb92b7",
+        "type": "template",
+        "z": "3a7efc5060a54b7b",
+        "name": "SetModeAndText",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\"mode\":{{payload.mode}}, \"text\":\"THỦ CÔNG\", \"switchButton\":false, \"switchText\":\"Tắt\", \"isOpen\":{{payload.isOpen}}}",
+        "output": "json",
+        "x": 2050.555419921875,
+        "y": 1200.5555419921875,
+        "wires": [
+            [
+                "20eece80988d9642",
+                "b4d9c5138cc61485",
+                "bed46b57757f2361",
+                "27ff2fe841041c05",
+                "2949949e20277d29",
+                "9467f773e738750d"
+            ]
+        ]
+    },
+    {
+        "id": "20eece80988d9642",
+        "type": "ui_template",
+        "z": "3a7efc5060a54b7b",
+        "group": "f816f812e61c4c7b",
+        "name": "Chế độ",
+        "order": 2,
+        "width": "4",
+        "height": "1",
+        "format": "<head>\n  <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.6.0/font/bootstrap-icons.min.css\">\n  <style>\n    /* .mode-text {\n      font-size: 20px;\n    } */\n\n    .mode-value {\n      font-size: 35px;\n      font-weight: bold;\n    }\n  \n    .mode {\n      text-align: center;\n    }\n  </style>\n\n</head>\n<body>\n  <div class=\"mode\">\n    <!-- <span class=\"mode-text\"></span> -->\n    <span class=\"mode-value\">CHẾ ĐỘ {{msg.payload.text}}</span>\n  </div>\n</body>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 2400,
+        "y": 1140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "283d0729bbd98054",
+        "type": "template",
+        "z": "3a7efc5060a54b7b",
+        "name": "GetSwitchValue",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "auto",
+        "output": "str",
+        "x": 2420,
+        "y": 1180,
+        "wires": [
+            [
+                "dab363ec93a22863"
+            ]
+        ]
+    },
+    {
+        "id": "2949949e20277d29",
+        "type": "template",
+        "z": "3a7efc5060a54b7b",
+        "name": "GetAwningStatus",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{{payload.isOpen}}",
+        "output": "str",
+        "x": 2430,
+        "y": 1100,
+        "wires": [
+            [
+                "3218ab8cc2a2cb17"
+            ]
+        ]
+    },
+    {
+        "id": "84e9696e2d380a81",
+        "type": "mqtt out",
+        "z": "3a7efc5060a54b7b",
+        "name": "",
+        "topic": "project/userControl",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "996140b2cebf7259",
+        "x": 3170,
+        "y": 1180,
+        "wires": []
+    },
+    {
+        "id": "b4d9c5138cc61485",
+        "type": "template",
+        "z": "3a7efc5060a54b7b",
+        "name": "GetSwitchValue",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "manual",
+        "output": "str",
+        "x": 2420,
+        "y": 1220,
+        "wires": [
+            [
+                "dab363ec93a22863"
+            ]
+        ]
+    },
+    {
+        "id": "46a67d8a9011e921",
+        "type": "mqtt out",
+        "z": "3a7efc5060a54b7b",
+        "name": "",
+        "topic": "project/userSetDefaultValues",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "996140b2cebf7259",
+        "x": 2460,
+        "y": 1460,
+        "wires": []
+    },
+    {
+        "id": "72ce9cd15b56eb5f",
+        "type": "mqtt out",
+        "z": "3a7efc5060a54b7b",
+        "name": "",
+        "topic": "project/userSetDefaultHumid",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "996140b2cebf7259",
+        "x": 2460,
+        "y": 1420,
+        "wires": []
+    },
+    {
+        "id": "56bad15efe186acc",
+        "type": "mqtt out",
+        "z": "3a7efc5060a54b7b",
+        "name": "",
+        "topic": "project/userSetDefaultTemp",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "996140b2cebf7259",
+        "x": 2460,
+        "y": 1380,
+        "wires": []
+    },
+    {
+        "id": "3218ab8cc2a2cb17",
+        "type": "ui_dropdown",
+        "z": "3a7efc5060a54b7b",
+        "name": "AwningControl",
+        "label": "",
+        "tooltip": "",
+        "place": "",
+        "group": "f816f812e61c4c7b",
+        "order": 4,
+        "width": "2",
+        "height": 1,
+        "passthru": false,
+        "multiple": false,
+        "options": [
+            {
+                "label": "Mở mái che",
+                "value": "true",
+                "type": "str"
+            },
+            {
+                "label": "Đóng mái che",
+                "value": "false",
+                "type": "str"
+            }
+        ],
+        "payload": "",
+        "topic": "topic",
+        "topicType": "msg",
+        "className": "automode",
+        "x": 2880,
+        "y": 1100,
+        "wires": [
+            [
+                "84e9696e2d380a81"
+            ]
+        ]
+    },
+    {
+        "id": "46bb877ce725dfc0",
+        "type": "change",
+        "z": "3a7efc5060a54b7b",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "enabled",
+                "pt": "msg",
+                "to": "true",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2620,
+        "y": 940,
+        "wires": [
+            [
+                "6e0352e78b4bc0eb"
+            ]
+        ]
+    },
+    {
+        "id": "2aa52156ac72744d",
+        "type": "change",
+        "z": "3a7efc5060a54b7b",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "enabled",
+                "pt": "msg",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2620,
+        "y": 980,
+        "wires": [
+            [
+                "3218ab8cc2a2cb17"
+            ]
+        ]
+    },
+    {
+        "id": "bed46b57757f2361",
+        "type": "change",
+        "z": "3a7efc5060a54b7b",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "enabled",
+                "pt": "msg",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2620,
+        "y": 1260,
+        "wires": [
+            [
+                "6e0352e78b4bc0eb"
+            ]
+        ]
+    },
+    {
+        "id": "27ff2fe841041c05",
+        "type": "change",
+        "z": "3a7efc5060a54b7b",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "enabled",
+                "pt": "msg",
+                "to": "true",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2620,
+        "y": 1300,
+        "wires": [
+            [
+                "3218ab8cc2a2cb17"
+            ]
+        ]
+    },
+    {
+        "id": "d83993ce6db45d3b",
+        "type": "mqtt in",
+        "z": "3a7efc5060a54b7b",
+        "name": "",
+        "topic": "project/data",
+        "qos": "2",
+        "datatype": "utf8",
+        "broker": "996140b2cebf7259",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 1210,
+        "y": 900,
+        "wires": [
+            [
+                "eba30f165df7d112"
+            ]
+        ]
+    },
+    {
+        "id": "684d316a404d82b8",
+        "type": "debug",
+        "z": "3a7efc5060a54b7b",
+        "name": "debug 14",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1390,
+        "y": 1140,
+        "wires": []
+    },
+    {
+        "id": "eba30f165df7d112",
+        "type": "json",
+        "z": "3a7efc5060a54b7b",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 1370,
+        "y": 900,
+        "wires": [
+            [
+                "684d316a404d82b8",
+                "5b691ffd2afe2afb",
+                "f4fe1ee0ef5bfa17",
+                "f33580691e96560e",
+                "762a85e67c06d87e",
+                "37bf7979e61f00cb",
+                "bd3113b5d8b002af",
+                "86ac1d7237c07da8"
+            ]
+        ]
+    },
+    {
+        "id": "063e67fd634c33c1",
+        "type": "debug",
+        "z": "3a7efc5060a54b7b",
+        "name": "debug 15",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2870,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "03e45c7fc51aa59a",
+        "type": "ui_group",
+        "name": "THỜI TIẾT VÀ MÁI CHE",
+        "tab": "df55acb984b0f2d7",
+        "order": 2,
+        "disp": true,
+        "width": "4",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "f816f812e61c4c7b",
+        "type": "ui_group",
+        "name": "CÀI ĐẶT MÁI CHE",
+        "tab": "df55acb984b0f2d7",
+        "order": 3,
+        "disp": true,
+        "width": "4",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "fb0d18da8272a13c",
+        "type": "ui_group",
+        "name": "CÀI ĐẶT THÔNG SỐ",
+        "tab": "df55acb984b0f2d7",
+        "order": 4,
+        "disp": true,
+        "width": "4",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "996140b2cebf7259",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "test.mosquitto.org",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "df55acb984b0f2d7",
+        "type": "ui_tab",
+        "name": "Dashboard",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
