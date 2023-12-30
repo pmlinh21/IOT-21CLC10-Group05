@@ -123,7 +123,7 @@ void setup(){
   Serial.println(WiFi.localIP());
 
   client.setServer(mqttServer, port);
-  // client.setCallback(callback);
+  client.setCallback(callback);
 }
 
 void closeMaiche(){
@@ -146,9 +146,9 @@ void loop(){
   client.loop();
 
   // read input
-  float temperature = dht.readTemperature();
-  float humidity = dht.readHumidity();
-  int rain = digitalRead(23);
+  temperature = dht.readTemperature();
+  humidity = dht.readHumidity();
+  rain = digitalRead(23);
 
   isRaining = (rain == LOW);
 
