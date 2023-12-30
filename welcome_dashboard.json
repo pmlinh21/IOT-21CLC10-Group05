@@ -27,7 +27,7 @@
             },
             {
                 "label": "Mật khẩu",
-                "value": "password",
+                "value": "pwd",
                 "type": "password",
                 "required": true,
                 "rows": null
@@ -35,20 +35,20 @@
         ],
         "formValue": {
             "email": "",
-            "password": ""
+            "pwd": ""
         },
         "payload": "",
         "submit": "Đăng nhập",
         "cancel": "",
-        "topic": "topic",
-        "topicType": "msg",
+        "topic": "loginInfo",
+        "topicType": "str",
         "splitLayout": false,
         "className": "loginform",
-        "x": 270,
-        "y": 280,
+        "x": 330,
+        "y": 540,
         "wires": [
             [
-                "7e71bf38a6872341"
+                "bb823abd169a18fe"
             ]
         ]
     },
@@ -57,15 +57,15 @@
         "type": "function",
         "z": "b7b8ddccd83ac326",
         "name": "loginCheck",
-        "func": "const users = [\n    {email: \"abc@gmail.com\", password: \"abc\"},\n    {email: \"def@gmail.com\", password: \"def\"},\n    {email: \"ghi@gmail.com\", password: \"ghi\"},\n    {email: \"jkl@gmail.com\", password: \"jkl\"},\n]\n\nfor (let i = 0; i < users.length; i++) {\n    if (JSON.stringify(users[i]) === JSON.stringify(msg.payload)) {\n      return {email: users[i].email};\n    }\n  }\n  return {email: null};",
+        "func": "\nfor (let i = 0; i < msg.user.length; i++) {\n    if (JSON.stringify(msg.user[i]) === JSON.stringify(msg.loginInfo))\n      return {email: msg.user[i].email}\n  }\n  return {email: null};",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 490,
-        "y": 280,
+        "x": 970,
+        "y": 540,
         "wires": [
             [
                 "ba157c196ede9770"
@@ -92,8 +92,8 @@
         "payloadType": "str",
         "topic": "topic",
         "topicType": "msg",
-        "x": 290,
-        "y": 360,
+        "x": 350,
+        "y": 720,
         "wires": [
             [
                 "bd9738fd99de612e"
@@ -106,8 +106,8 @@
         "z": "b7b8ddccd83ac326",
         "name": "",
         "events": "change",
-        "x": 700,
-        "y": 360,
+        "x": 800,
+        "y": 720,
         "wires": [
             []
         ]
@@ -124,8 +124,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 500,
-        "y": 360,
+        "x": 540,
+        "y": 720,
         "wires": [
             [
                 "e4ba9de54cbf52ec"
@@ -153,11 +153,12 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 270,
-        "y": 160,
+        "x": 330,
+        "y": 320,
         "wires": [
             [
-                "e02287227eed00e0"
+                "e02287227eed00e0",
+                "0ae29045113926c1"
             ]
         ]
     },
@@ -173,8 +174,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 500,
-        "y": 160,
+        "x": 540,
+        "y": 320,
         "wires": [
             [
                 "158f1b5698142cb8"
@@ -187,8 +188,8 @@
         "z": "b7b8ddccd83ac326",
         "name": "",
         "events": "change",
-        "x": 700,
-        "y": 160,
+        "x": 800,
+        "y": 320,
         "wires": [
             []
         ]
@@ -213,7 +214,7 @@
             },
             {
                 "label": "Mật khẩu",
-                "value": "password",
+                "value": "pwd",
                 "type": "password",
                 "required": true,
                 "rows": null
@@ -221,17 +222,17 @@
         ],
         "formValue": {
             "email": "",
-            "password": ""
+            "pwd": ""
         },
         "payload": "",
         "submit": "Đăng kí",
         "cancel": "",
-        "topic": "topic",
-        "topicType": "msg",
+        "topic": "signupInfo",
+        "topicType": "str",
         "splitLayout": "",
         "className": "signupform",
-        "x": 270,
-        "y": 440,
+        "x": 330,
+        "y": 600,
         "wires": [
             [
                 "adad0ab69df7bbca"
@@ -256,8 +257,8 @@
         "checkall": "true",
         "repair": true,
         "outputs": 2,
-        "x": 710,
-        "y": 280,
+        "x": 1170,
+        "y": 540,
         "wires": [
             [
                 "dd52fdc59d9bd77c"
@@ -272,19 +273,19 @@
         "type": "function",
         "z": "b7b8ddccd83ac326",
         "name": "true",
-        "func": "\nreturn msg;",
+        "func": "return msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 930,
-        "y": 240,
+        "x": 1390,
+        "y": 560,
         "wires": [
             [
-                "a599a86d01f9924f",
-                "e8c14fc5feeae19d"
+                "e8c14fc5feeae19d",
+                "8602150502c6d79e"
             ]
         ]
     },
@@ -300,8 +301,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 930,
-        "y": 300,
+        "x": 1390,
+        "y": 440,
         "wires": [
             [
                 "eb15218f7976c2b1"
@@ -312,41 +313,20 @@
         "id": "adad0ab69df7bbca",
         "type": "function",
         "z": "b7b8ddccd83ac326",
-        "name": "signupCheck",
-        "func": "const users = [\n    {email: \"abc@gmail.com\", password: \"abc\"},\n    {email: \"def@gmail.com\", password: \"def\"},\n    {email: \"ghi@gmail.com\", password: \"ghi\"},\n    {email: \"jkl@gmail.com\", password: \"jkl\"},\n]\n\nfor (let i = 0; i < users.length; i++) {\n    if (users[i].email === msg.payload.email ) {\n      return {isSignUp: \"false\"};\n    }\n  }\nreturn { isSignUp: \"true\"};",
+        "name": "return signupInfo",
+        "func": "msg.signupInfo = msg.payload\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 490,
-        "y": 440,
+        "x": 570,
+        "y": 600,
         "wires": [
             [
-                "eb6a470f0d508ac9"
+                "f5698e0e9e30c301"
             ]
-        ]
-    },
-    {
-        "id": "a72559ee5eba86a4",
-        "type": "ui_toast",
-        "z": "b7b8ddccd83ac326",
-        "position": "dialog",
-        "displayTime": "20",
-        "highlight": "",
-        "sendall": true,
-        "outputs": 1,
-        "ok": "OK",
-        "cancel": "",
-        "raw": false,
-        "className": "",
-        "topic": "",
-        "name": "see dashboard screen",
-        "x": 1160,
-        "y": 400,
-        "wires": [
-            []
         ]
     },
     {
@@ -354,28 +334,24 @@
         "type": "switch",
         "z": "b7b8ddccd83ac326",
         "name": "signupCheck",
-        "property": "isSignUp",
+        "property": "email",
         "propertyType": "msg",
         "rules": [
             {
-                "t": "eq",
-                "v": "true",
-                "vt": "str"
+                "t": "nnull"
             },
             {
-                "t": "eq",
-                "v": "false",
-                "vt": "str"
+                "t": "null"
             }
         ],
         "checkall": "true",
-        "repair": false,
+        "repair": true,
         "outputs": 2,
-        "x": 710,
-        "y": 440,
+        "x": 1170,
+        "y": 600,
         "wires": [
             [
-                "762ac143eab696b3"
+                "dd52fdc59d9bd77c"
             ],
             [
                 "1a9d13d48a0cb84c"
@@ -397,30 +373,10 @@
         "className": "",
         "topic": "",
         "name": "unsuccessful msg",
-        "x": 1150,
-        "y": 460,
+        "x": 1430,
+        "y": 720,
         "wires": [
             []
-        ]
-    },
-    {
-        "id": "762ac143eab696b3",
-        "type": "function",
-        "z": "b7b8ddccd83ac326",
-        "name": "true",
-        "func": "msg.payload = \"Sign up successfully\"\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 930,
-        "y": 400,
-        "wires": [
-            [
-                "a72559ee5eba86a4"
-            ]
         ]
     },
     {
@@ -435,8 +391,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 930,
-        "y": 460,
+        "x": 1390,
+        "y": 660,
         "wires": [
             [
                 "081a5bf312419482"
@@ -463,8 +419,8 @@
         "payloadType": "str",
         "topic": "topic",
         "topicType": "msg",
-        "x": 270,
-        "y": 520,
+        "x": 330,
+        "y": 660,
         "wires": [
             [
                 "4141001c815e88f8"
@@ -477,8 +433,8 @@
         "z": "b7b8ddccd83ac326",
         "name": "",
         "events": "change",
-        "x": 700,
-        "y": 520,
+        "x": 800,
+        "y": 660,
         "wires": [
             []
         ]
@@ -495,8 +451,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 500,
-        "y": 520,
+        "x": 540,
+        "y": 660,
         "wires": [
             [
                 "70bb687e4a10743e"
@@ -520,8 +476,8 @@
         "font": "",
         "fontSize": "30",
         "color": "#0094ce",
-        "x": 280,
-        "y": 220,
+        "x": 340,
+        "y": 780,
         "wires": []
     },
     {
@@ -533,14 +489,14 @@
         "order": 1,
         "width": 0,
         "height": 0,
-        "format": "<style>\n#Welcome_Login,\n#Welcome_Signup{\n    margin-top: 6rem !important;\n}\n\n.welcome-text{\n    font-weight: 650;\n}\n\n.loginform, .signupform{\n    margin: 0.5rem auto !important;\n    max-width: 25rem;\n    position: absolute !important;\n    top: 20% !important;\n    left: 33.5% !important;\n    /* margin-top: 0.5rem !important; */\n}\n\n.loginform [type=submit],\n.signupform [type=submit]{\n    max-width: 10rem;\n    max-height: 3rem;\n    line-height: 3rem !important;\n}\n\n.createacc-button{\n    max-width: 10rem;\n    max-height: 3rem;\n    position: absolute !important;\n    top: 75% !important;\n    left: 43% !important;\n}\n\n.back-button{\n    max-width: 10rem;\n    max-height: 3rem;\n    position: absolute !important;\n    top: 88% !important;\n    left: 43% !important;\n}\n\n.logout-button{\n    max-width: 8rem !important;\n    max-height: 3rem;\n    line-height: 3rem !important;\n    position: absolute !important;\n    top: 2rem !important;\n    left: 68rem !important;\n}\n\n.humidchart{\n    margin-left: 6rem !important;\n}\n\n.humidchart,\n.tempchart{\n    margin-top: -3rem !important;\n}\n\n.rainchart{\n    margin-top: 6rem !important;\n}\n\n</style>",
+        "format": "<style>\n#Welcome_Login,\n#Welcome_Signup{\n    margin-top: 6rem !important;\n}\n\n.welcome-text{\n    font-weight: 650;\n}\n\n.loginform, .signupform{\n    margin: 0.5rem auto !important;\n    max-width: 25rem;\n    position: absolute !important;\n    top: 20% !important;\n    left: 33.5% !important;\n    /* margin-top: 0.5rem !important; */\n}\n\n.loginform [type=submit],\n.signupform [type=submit]{\n    max-width: 10rem;\n    max-height: 3rem;\n    line-height: 3rem !important;\n}\n\n.createacc-button{\n    max-width: 10rem;\n    max-height: 3rem;\n    position: absolute !important;\n    top: 75% !important;\n    left: 43% !important;\n}\n\n.back-button{\n    max-width: 10rem;\n    max-height: 3rem;\n    position: absolute !important;\n    top: 75% !important;\n    left: 43% !important;\n}\n\n.logout-button{\n    max-width: 8rem !important;\n    max-height: 3rem;\n    line-height: 3rem !important;\n    position: absolute !important;\n    top: 2rem !important;\n    left: 68rem !important;\n}\n\n.humidchart{\n    margin-left: 6rem !important;\n}\n\n.humidchart,\n.tempchart{\n    margin-top: -3rem !important;\n}\n\n.rainchart{\n    margin-top: 6rem !important;\n}\n\n</style>",
         "storeOutMessages": true,
         "fwdInMessages": true,
         "resendOnRefresh": true,
         "templateScope": "global",
         "className": "",
-        "x": 1780,
-        "y": 60,
+        "x": 1680,
+        "y": 320,
         "wires": [
             []
         ]
@@ -560,8 +516,8 @@
         "className": "",
         "topic": "",
         "name": "unsuccessful msg",
-        "x": 1150,
-        "y": 300,
+        "x": 1430,
+        "y": 380,
         "wires": [
             []
         ]
@@ -584,45 +540,7 @@
         "fontSize": "20",
         "color": "#0094ce",
         "x": 1670,
-        "y": 240,
-        "wires": []
-    },
-    {
-        "id": "a599a86d01f9924f",
-        "type": "function",
-        "z": "b7b8ddccd83ac326",
-        "name": "welcome text",
-        "func": "msg.email = \"abc@gmail.com\"\n\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1430,
-        "y": 240,
-        "wires": [
-            [
-                "8602150502c6d79e",
-                "0309ab43d1720605"
-            ]
-        ]
-    },
-    {
-        "id": "0309ab43d1720605",
-        "type": "debug",
-        "z": "b7b8ddccd83ac326",
-        "name": "debug 6",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1660,
-        "y": 300,
+        "y": 560,
         "wires": []
     },
     {
@@ -631,8 +549,8 @@
         "z": "b7b8ddccd83ac326",
         "name": "",
         "events": "change",
-        "x": 1660,
-        "y": 160,
+        "x": 1880,
+        "y": 440,
         "wires": [
             []
         ]
@@ -649,8 +567,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1420,
-        "y": 160,
+        "x": 1660,
+        "y": 440,
         "wires": [
             [
                 "f0bfea316dbe623d"
@@ -666,7 +584,7 @@
         "order": 3,
         "width": "5",
         "height": "5",
-        "label": "Nhiệt độ (°C)",
+        "label": "{{msg.topic}}",
         "chartType": "line",
         "legend": "false",
         "xformat": "HH:mm:ss",
@@ -695,8 +613,8 @@
         "outputs": 1,
         "useDifferentColor": false,
         "className": "tempchart",
-        "x": 1910,
-        "y": 380,
+        "x": 2130,
+        "y": 660,
         "wires": [
             []
         ]
@@ -714,8 +632,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1900,
-        "y": 440,
+        "x": 2120,
+        "y": 720,
         "wires": []
     },
     {
@@ -723,15 +641,15 @@
         "type": "function",
         "z": "b7b8ddccd83ac326",
         "name": "Temperature chart",
-        "func": "msg.payload = Math.random() + 20;\nmsg.topic = \"Nhiệt độ (°C)\"\n\n\nreturn msg;",
+        "func": "let time = msg.payload;\n\nmsg.payload = [{\n    \"series\": [\"Nhiệt độ\"],\n    \"data\": [\n        [\n            { \"x\": time + 2000, \"y\": Math.random() + 20},\n            { \"x\": time + 4000, \"y\": Math.random() + 50},\n        ]\n    ],\n    }]\nmsg.topic = \"Nhiệt độ (°C)\"\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1690,
-        "y": 380,
+        "x": 1910,
+        "y": 660,
         "wires": [
             [
                 "9d989beaac14d252",
@@ -748,7 +666,7 @@
         "order": 4,
         "width": "5",
         "height": "5",
-        "label": "Độ ẩm (%)",
+        "label": "{{msg.topic}}",
         "chartType": "line",
         "legend": "false",
         "xformat": "HH:mm:ss",
@@ -777,8 +695,8 @@
         "outputs": 1,
         "useDifferentColor": false,
         "className": "humidchart",
-        "x": 1910,
-        "y": 540,
+        "x": 2130,
+        "y": 820,
         "wires": [
             []
         ]
@@ -796,8 +714,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1900,
-        "y": 600,
+        "x": 2120,
+        "y": 880,
         "wires": []
     },
     {
@@ -805,15 +723,15 @@
         "type": "function",
         "z": "b7b8ddccd83ac326",
         "name": "Humidity chart",
-        "func": "msg.payload = Math.random() + 20;\nmsg.topic = \"Humid\"\n\n\nreturn msg;",
+        "func": "let time = msg.payload;\n\nmsg.payload = [{\n    \"series\": [\"Độ ẩm\"],\n    \"data\": [\n        [\n            { \"x\": time + 2000, \"y\": Math.random() + 30},\n            { \"x\": time + 4000, \"y\": Math.random() + 60},\n        ]\n    ],\n    }]\nmsg.topic = \"Độ ẩm (%)\"\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1680,
-        "y": 540,
+        "x": 1900,
+        "y": 820,
         "wires": [
             [
                 "8ac4cc0c586656f4",
@@ -841,8 +759,8 @@
         "payloadType": "str",
         "topic": "topic",
         "topicType": "msg",
-        "x": 1910,
-        "y": 240,
+        "x": 1670,
+        "y": 500,
         "wires": [
             [
                 "51cbf96586685822"
@@ -855,8 +773,8 @@
         "z": "b7b8ddccd83ac326",
         "name": "",
         "events": "change",
-        "x": 2340,
-        "y": 240,
+        "x": 2100,
+        "y": 500,
         "wires": [
             []
         ]
@@ -873,8 +791,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2140,
-        "y": 240,
+        "x": 1900,
+        "y": 500,
         "wires": [
             [
                 "db9c7f2897e73ec9"
@@ -902,8 +820,8 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 1430,
-        "y": 540,
+        "x": 1650,
+        "y": 820,
         "wires": [
             [
                 "36f0ee7cb0f33154",
@@ -935,7 +853,7 @@
         "removeOlderUnit": "3600",
         "cutout": 0,
         "useOneColor": false,
-        "useUTC": true,
+        "useUTC": false,
         "colors": [
             "#0094fd",
             "#0094fd",
@@ -950,8 +868,8 @@
         "outputs": 1,
         "useDifferentColor": false,
         "className": "rainchart",
-        "x": 1910,
-        "y": 680,
+        "x": 2130,
+        "y": 960,
         "wires": [
             []
         ]
@@ -961,20 +879,193 @@
         "type": "function",
         "z": "b7b8ddccd83ac326",
         "name": "graph generate",
-        "func": "msg.payload = [{\n    \"series\": [\"Lần 1\",\"Lần 2\"],\n    \"data\": [\n        [\n            { \"x\": 1504029632890, \"y\": 1},\n            { \"x\": 1504029638656, \"y\": 1 },\n        ],\n        [\n            { \"x\": 1504039646622, \"y\": 1 },\n            { \"x\": 1504039649539, \"y\": 1 },\n        ]\n    ],\n    }]\n\nreturn msg;",
+        "func": "let time = msg.payload;\n\nmsg.payload = [{\n    \"series\": [\"Lần 1\",\"Lần 2\"],\n    \"data\": [\n        [\n            { \"x\": time + 2000, \"y\": 1},\n            { \"x\": time  + 4000, \"y\": 1 },\n        ],\n        [\n            { \"x\": time + 9000, \"y\": 1 },\n            { \"x\": time + 14000, \"y\": 1 },\n        ]\n    ],\n    }]\n\nreturn msg;",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1680,
-        "y": 680,
+        "x": 1900,
+        "y": 960,
         "wires": [
             [
                 "ff0ba1e2.f46ab"
             ]
         ]
+    },
+    {
+        "id": "18ea8e3992a17fe5",
+        "type": "ui_text",
+        "z": "b7b8ddccd83ac326",
+        "group": "40f9b51bc8382105",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "Welcome text",
+        "label": "CHÀO MỪNG ĐẾN ",
+        "format": "HỆ THỐNG MÁI CHE THÔNG MINH",
+        "layout": "col-center",
+        "className": "welcome-text",
+        "style": true,
+        "font": "",
+        "fontSize": "30",
+        "color": "#0094ce",
+        "x": 340,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "0ae29045113926c1",
+        "type": "firebase-get",
+        "z": "b7b8ddccd83ac326",
+        "name": "GET user",
+        "constraint": {},
+        "database": "e06e2b12d2b78bdf",
+        "outputType": "auto",
+        "passThrough": true,
+        "path": "user",
+        "pathType": "str",
+        "useConstraint": false,
+        "x": 60,
+        "y": 420,
+        "wires": [
+            [
+                "a397747c61ce1a88"
+            ]
+        ]
+    },
+    {
+        "id": "a397747c61ce1a88",
+        "type": "function",
+        "z": "b7b8ddccd83ac326",
+        "name": "return msg.user",
+        "func": "msg.user = []\n\nfor (let key in msg.payload) {\n  if (msg.payload.hasOwnProperty(key)) {\n    msg.user.push({\n        email: msg.payload[key].email,\n        pwd: msg.payload[key].pwd})\n    }\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 560,
+        "y": 420,
+        "wires": [
+            [
+                "cde71d90411c9745",
+                "f5698e0e9e30c301"
+            ]
+        ]
+    },
+    {
+        "id": "cde71d90411c9745",
+        "type": "join",
+        "z": "b7b8ddccd83ac326",
+        "name": "",
+        "mode": "custom",
+        "build": "object",
+        "property": "",
+        "propertyType": "full",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": false,
+        "timeout": "",
+        "count": "2",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "num",
+        "reduceFixup": "",
+        "x": 790,
+        "y": 540,
+        "wires": [
+            [
+                "7e71bf38a6872341"
+            ]
+        ]
+    },
+    {
+        "id": "bb823abd169a18fe",
+        "type": "function",
+        "z": "b7b8ddccd83ac326",
+        "name": "return msg.loginInfo",
+        "func": "msg.loginInfo = msg.payload\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 580,
+        "y": 540,
+        "wires": [
+            [
+                "cde71d90411c9745"
+            ]
+        ]
+    },
+    {
+        "id": "f5698e0e9e30c301",
+        "type": "join",
+        "z": "b7b8ddccd83ac326",
+        "name": "",
+        "mode": "custom",
+        "build": "object",
+        "property": "",
+        "propertyType": "full",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": false,
+        "timeout": "",
+        "count": "2",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "num",
+        "reduceFixup": "",
+        "x": 790,
+        "y": 600,
+        "wires": [
+            [
+                "34459d66f17effa5"
+            ]
+        ]
+    },
+    {
+        "id": "34459d66f17effa5",
+        "type": "function",
+        "z": "b7b8ddccd83ac326",
+        "name": "signupCheck",
+        "func": "for (let i = 0; i < msg.user.length; i++) {\n    if (msg.user[i].email === msg.signupInfo.email)\n      return {email: null}\n  }\n\nreturn {email: msg.signupInfo.email,\npayload:{\n  email: msg.signupInfo.email,\n  pwd: msg.signupInfo.pwd\n}};",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 970,
+        "y": 600,
+        "wires": [
+            [
+                "eb6a470f0d508ac9",
+                "7ba0b1735cdda613"
+            ]
+        ]
+    },
+    {
+        "id": "7ba0b1735cdda613",
+        "type": "firebase-out",
+        "z": "b7b8ddccd83ac326",
+        "name": "",
+        "database": "e06e2b12d2b78bdf",
+        "path": "user",
+        "pathType": "str",
+        "priority": 1,
+        "queryType": "push",
+        "x": 1170,
+        "y": 660,
+        "wires": []
     },
     {
         "id": "77229db0388e207c",
@@ -1008,6 +1099,15 @@
         "width": "12",
         "collapse": false,
         "className": ""
+    },
+    {
+        "id": "e06e2b12d2b78bdf",
+        "type": "database-config",
+        "name": "My Database",
+        "authType": "anonymous",
+        "claims": {},
+        "createUser": false,
+        "useClaims": false
     },
     {
         "id": "fdfbb22524a96141",
