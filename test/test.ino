@@ -64,8 +64,10 @@ void mqttReconnect() {
     Serial.print("Attempting MQTT connection...");
     if (client.connect("21127341")) {
       Serial.println(" connected");
-      client.subscribe("project/userOpenMaiche");
-
+      client.subscribe("project/userControl");
+      client.subscribe("project/userSetDefaultTemp");
+      client.subscribe("project/userSetDefaultHumid");
+      client.subscribe("project/userSetDefaultValues");
       // subcribe other topics here
 
     } else {
@@ -81,26 +83,52 @@ void callback(char* topic, byte* message, unsigned int length) {
     stMessage += (char)message[i];
   }
 
-  // Chế độ 3
-  if (strcmp(topic, "project/userOpenMaiche")) {
+  if (strcmp(topic, "project/userControl") == 0) {
+    if (stMessage == "true") {
+      Serial.println("Người dùng mở mái che");
+      // openMaiche();
+      isOpen = true;
+    }
+    else if (stMessage == "false") {
+      Serial.println("Người dùng đóng mái che");
+      // closeMaiche();
+      isOpen = false;
+    }
+    else if (stMessage == "1") {
+      Serial.println("Người dùng chuyển chế độ Bình thường");
+      mode = 1;
+    }
+    else if (stMessage == "2") {
+      Serial.println("Người dùng chuyển chế độ Phơi đồ");
+      mode = 2;
+    }
+    else if (stMessage == "auto") {
+      Serial.println("Người dùng chuyển chế độ Tự động");
+      mode = 1;
+    }
+    else if (stMessage == "manual") {
+      Serial.println("Người dùng chuyển chế độ Thủ công");
+      mode = 3;
+    }
+    else {
+      Serial.println("error1");
+    }
     Serial.println(stMessage);
-    // if (stMessage == "Mở") {
-    //   Serial.println("Người dùng mở mái che");
-    //   openMaiche();
-    // }
-    // else if (stMessage == "Đóng") {
-    //   Serial.println("Người dùng đóng mái che");
-    //   closeMaiche();
-    // }
-    // else {
-    //   Serial.println("Sai topic hoặc sai message");
-    // }
+  } else if (strcmp(topic, "project/userSetDefaultTemp") == 0) {
+    Serial.println("Người dùng chỉnh nhiệt độ mặc định");
+    defaultTemperature = stMessage.toInt();
+    Serial.println(defaultTemperature);
+  } else if (strcmp(topic, "project/userSetDefaultHumid") == 0) {
+    Serial.println("Người dùng chỉnh độ ẩm mặc định");
+    defaultHumidity = stMessage.toInt();
+    Serial.println(defaultHumidity);
+  } else if (strcmp(topic, "project/userSetDefaultValues") == 0) {
+    Serial.println("Người dùng chỉnh về thông số mặc định");
+    defaultTemperature = 35;
+    defaultHumidity = 80;
+  } else {
+    Serial.println("error2");
   }
-
-  // Người dùng điều chỉnh nhiệt độ & độ ẩm mặc định
-  // if(strcmp(topic, "project/changeDefaultValues")) {
-  //   if (stMessage == ) 
-  // }
 }
 
 void setup(){
@@ -115,8 +143,8 @@ void setup(){
 
   dht.begin();
   
-  pinMode(GPIO_NUM_2, OUTPUT);
-  digitalWrite(GPIO_NUM_2, HIGH);
+  // pinMode(GPIO_NUM_2, OUTPUT);
+  // digitalWrite(GPIO_NUM_2, HIGH);
   wifiConnect();
 
   Serial.println("IP address: ");
@@ -165,7 +193,7 @@ void loop(){
     isSafe = (humidity < 80);
     sprintf(buffer, "{\"defaultTemperature\":%.0f, \"defaultHumidity\":%.0f, \"temperature\":%.1f, \"humidity\":%.0f, \"isOpen\":%s, \"isRaining\":%s, \"isHot\":%s, \"isSafe\":%s, \"mode\":%d}", defaultTemperature, defaultHumidity, temperature, humidity, isOpen ? "true" : "false", isRaining ? "true" : "false", isHot ? "true" : "false", isSafe ? "true" : "false", mode);
   }
-  Serial.println(buffer);
+  // Serial.println(buffer);
   client.publish("project/data", buffer);
 
   if (mode == 1) {
