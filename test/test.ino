@@ -86,12 +86,12 @@ void callback(char* topic, byte* message, unsigned int length) {
   if (strcmp(topic, "project/userControl") == 0) {
     if (stMessage == "true") {
       Serial.println("Người dùng mở mái che");
-      // openMaiche();
+      openMaiche();
       isOpen = true;
     }
     else if (stMessage == "false") {
       Serial.println("Người dùng đóng mái che");
-      // closeMaiche();
+      closeMaiche();
       isOpen = false;
     }
     else if (stMessage == "1") {
@@ -197,10 +197,28 @@ void loop(){
   client.publish("project/data", buffer);
 
   if (mode == 1) {
-    // chế độ "Bình thường"
+    if ((isHot && !isOpen)||(isRaining && !isOpen)){
+      openMaiChe();
+      isOpen=true;
+    }
+    else if (isOpen){
+      closeMaiChe();
+      isOpen=false;
+    }
+    
+
   }
   else if (mode == 2) {
     // chế độ "Phơi đồ"
+    if(isRaining && !isOpen){
+      openMaiChe();
+      isOpen=true;
+    }
+    else if(isOpen){
+      closeMaiChe();
+      isOpen=false;
+    }
+    
   }
   else if (mode == 3) {
     // chế độ "Tự điều khiển"
