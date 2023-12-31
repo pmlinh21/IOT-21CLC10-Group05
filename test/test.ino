@@ -201,19 +201,11 @@ void loop(){
 
   if (mode == 1) {
     if ((isHot && !isOpen)||(isRaining && !isOpen)){
-<<<<<<< HEAD
       openMaiche();
       isOpen=true;
     }
     else if (!isHot && isOpen && !isRaining){
       closeMaiche();
-=======
-      openMaiChe();
-      isOpen=true;
-    }
-    else if (isOpen){
-      closeMaiChe();
->>>>>>> 32990c5ba5ec2a3aed7691a48c18ab925b91d210
       isOpen=false;
     }
     
@@ -222,19 +214,11 @@ void loop(){
   else if (mode == 2) {
     // chế độ "Phơi đồ"
     if(isRaining && !isOpen){
-<<<<<<< HEAD
       openMaiche();
       isOpen=true;
     }
     else if (!isRaining && isOpen){
       closeMaiche();
-=======
-      openMaiChe();
-      isOpen=true;
-    }
-    else if(isOpen){
-      closeMaiChe();
->>>>>>> 32990c5ba5ec2a3aed7691a48c18ab925b91d210
       isOpen=false;
     }
     
