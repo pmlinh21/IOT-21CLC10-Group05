@@ -26,7 +26,14 @@ bool isRaining = false;             // Trời không mưa     (rain = HIGH)
 bool isHot = false;                 // Trời không nóng    (temperature > 35)
 bool isSafe = true;                 // Mạch điện an toàn (humidity < 80)
 int mode = 1;                       // 1: Chế độ tự động "Bình thường", 2: Chế độ tự động "Phơi đồ", 3: Người dùng tự điều khiển
+bool warning =false;
 
+const char* host = "maker.ifttt.com";
+const char* requestAwningOpen ="/trigger/awning_open/with/key/O1GD7w-u_n1I9S17Dn4u_"; //mở mái che
+const char* requestAwningClose ="/trigger/awning_close/with/key/O1GD7w-u_n1I9S17Dn4u_";//đóng mái che
+const char* requestHumidityWarning ="/trigger/humidity_warning/with/key/O1GD7w-u_n1I9S17Dn4u_";//cảnh báo độ ẩm cao
+
+const int iftttPort = 80;
 // Wifi Cafe
 // const char* ssid = "The Simple Cafe";
 // const char* password = "simpleisthebest";
@@ -134,6 +141,22 @@ void callback(char* topic, byte* message, unsigned int length) {
   }
 }
 
+void sendHttpRequest(char* request){
+  WiFiClient client;
+  while(!client.connect(host,port)){
+    Serial.println("Connection fail");
+    delay(1000);
+  }
+  client.print("GET "+String(request)+" HTTP/1.1\r\n"
+  +"Host: "+host+"\r\n"+
+  "Connection: close\r\n\r\n");
+  delay(500);
+  while(client.available()){
+    String line =client.readStringUntil('\r');
+    Serial.print(line);
+  }
+}
+
 void setup(){
   Serial.begin(115200);
 
@@ -161,12 +184,14 @@ void closeMaiche(){
   digitalWrite(MOTOR_PIN_1,HIGH);
   delay(2000);
   digitalWrite(MOTOR_PIN_1,LOW);
+  sendHttpRequest(requestAwningClose);
 }
 
 void openMaiche(){
   digitalWrite(MOTOR_PIN_2,HIGH);
   delay(2000);
   digitalWrite(MOTOR_PIN_2,LOW);
+  sendHttpRequest(requestAwningOpen);
 }
 
 void loop(){
@@ -194,6 +219,7 @@ void loop(){
   else {
     isHot = (temperature > defaultTemperature);
     isSafe = (humidity < defaultHumidity);
+    if(isSafe) warning = false;
     sprintf(buffer, "{\"defaultTemperature\":%.0f, \"defaultHumidity\":%.0f, \"temperature\":%.1f, \"humidity\":%.0f, \"isOpen\":%s, \"isRaining\":%s, \"isHot\":%s, \"isSafe\":%s, \"mode\":%d}", defaultTemperature, defaultHumidity, temperature, humidity, isOpen ? "true" : "false", isRaining ? "true" : "false", isHot ? "true" : "false", isSafe ? "true" : "false", mode);
   }
   // Serial.println(buffer);
@@ -226,6 +252,11 @@ void loop(){
   else if (mode == 3) {
     // chế độ "Tự điều khiển"
     // do nothing, only receive msg from mqtt
+  }
+
+  if(!isSafe && !warning){
+    sendHttpRequest(requestHumidityWarning);
+    warning = true;
   }
 
   delay(500);
