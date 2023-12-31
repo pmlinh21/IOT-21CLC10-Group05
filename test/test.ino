@@ -28,8 +28,8 @@ bool isSafe = true;                 // Mạch điện an toàn (humidity < 80)
 int mode = 1;                       // 1: Chế độ tự động "Bình thường", 2: Chế độ tự động "Phơi đồ", 3: Người dùng tự điều khiển
 
 // Wifi Cafe
-const char* ssid = "The Simple Cafe";
-const char* password = "simpleisthebest";
+// const char* ssid = "The Simple Cafe";
+// const char* password = "simpleisthebest";
 
 // Wifi Lien
 // const char* ssid = "YenLien";
@@ -42,6 +42,9 @@ const char* password = "simpleisthebest";
 // Wifi Thư viện
 // const char* ssid = "HCMUS Thu Vien";
 // const char* password = "12345678";
+
+const char* ssid = "Khanh Ngoc";
+const char* password = "Giaquy@@2015pcduc";
 
 const char*  mqttServer = "test.mosquitto.org";
 int port = 1883;
@@ -86,12 +89,12 @@ void callback(char* topic, byte* message, unsigned int length) {
   if (strcmp(topic, "project/userControl") == 0) {
     if (stMessage == "true") {
       Serial.println("Người dùng mở mái che");
-      // openMaiche();
+      openMaiche();
       isOpen = true;
     }
     else if (stMessage == "false") {
       Serial.println("Người dùng đóng mái che");
-      // closeMaiche();
+      closeMaiche();
       isOpen = false;
     }
     else if (stMessage == "1") {
@@ -189,23 +192,41 @@ void loop(){
     sprintf(buffer, "{\"defaultTemperature\":%.0f, \"defaultHumidity\":%.0f, \"temperature\":null, \"humidity\":null, \"isOpen\":%s, \"isRaining\":%s, \"isHot\":%s, \"isSafe\":%s, \"mode\":%d}", defaultTemperature, defaultHumidity, isOpen ? "true" : "false", isRaining ? "true" : "false", isHot ? "true" : "false", isSafe ? "true" : "false", mode);
   }
   else {
-    isHot = (temperature > 35);
-    isSafe = (humidity < 80);
+    isHot = (temperature > defaultTemperature);
+    isSafe = (humidity < defaultHumidity);
     sprintf(buffer, "{\"defaultTemperature\":%.0f, \"defaultHumidity\":%.0f, \"temperature\":%.1f, \"humidity\":%.0f, \"isOpen\":%s, \"isRaining\":%s, \"isHot\":%s, \"isSafe\":%s, \"mode\":%d}", defaultTemperature, defaultHumidity, temperature, humidity, isOpen ? "true" : "false", isRaining ? "true" : "false", isHot ? "true" : "false", isSafe ? "true" : "false", mode);
   }
   // Serial.println(buffer);
   client.publish("project/data", buffer);
 
   if (mode == 1) {
-    // chế độ "Bình thường"
+    if ((isHot && !isOpen)||(isRaining && !isOpen)){
+      openMaiche();
+      isOpen=true;
+    }
+    else if (!isHot && isOpen && !isRaining){
+      closeMaiche();
+      isOpen=false;
+    }
+    
+
   }
   else if (mode == 2) {
     // chế độ "Phơi đồ"
+    if(isRaining && !isOpen){
+      openMaiche();
+      isOpen=true;
+    }
+    else if (!isRaining && isOpen){
+      closeMaiche();
+      isOpen=false;
+    }
+    
   }
   else if (mode == 3) {
     // chế độ "Tự điều khiển"
     // do nothing, only receive msg from mqtt
   }
 
-  delay(100);
+  delay(500);
 }
