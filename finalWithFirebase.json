@@ -56,6 +56,7 @@
         "id": "c1a2eef6a5905216",
         "type": "ui_button",
         "z": "ca325aaf4a15f98c",
+        "d": true,
         "name": "Create an account?",
         "group": "77229db0388e207c",
         "order": 3,
@@ -148,6 +149,7 @@
         "id": "4292b0d693484f84",
         "type": "ui_form",
         "z": "ca325aaf4a15f98c",
+        "d": true,
         "name": "Sign up form",
         "label": "",
         "group": "40f9b51bc8382105",
@@ -546,9 +548,9 @@
         "dot": true,
         "ymin": "0",
         "ymax": "100",
-        "removeOlder": "30",
+        "removeOlder": "1",
         "removeOlderPoints": "",
-        "removeOlderUnit": "1",
+        "removeOlderUnit": "3600",
         "cutout": 0,
         "useOneColor": true,
         "useUTC": false,
@@ -1465,7 +1467,7 @@
         "type": "function",
         "z": "ca325aaf4a15f98c",
         "name": "return data ",
-        "func": "msg.temp = []\nmsg.humid = []\nmsg.rain = []\nmsg.open = []\nvar lastRain = false;\nvar lastOpen = false;\n\nfor (let key in msg.payload) {\n  if (msg.payload.hasOwnProperty(key)){ \n    const time = msg.payload[key].time\n    msg.temp.push({\n        x: time, y: msg.payload[key].temp})\n    msg.humid.push({\n        x: time, y: msg.payload[key].humid\n    })\n\n    const rain = msg.payload[key].rain\n    if (rain && !lastRain){\n      msg.rain.push(time)\n      lastRain = true;\n    } else if (!rain && lastRain)\n      msg.rain.push(time)\n\n    const open = msg.payload[key].open\n    if (open && !lastOpen) {\n      msg.open.push(time)\n      lastOpen = true;\n    } else if (!open && lastOpen)\n      msg.open.push(time)\n  }\n}\n\nreturn msg;",
+        "func": "msg.temp = []\nmsg.humid = []\nmsg.rain = []\nmsg.open = []\nvar lastRain = false;\nvar lastOpen = false;\n\nfor (let key in msg.payload) {\n  if (msg.payload.hasOwnProperty(key)){ \n    const time = msg.payload[key].time\n    msg.temp.push({\n        x: time, y: msg.payload[key].temp})\n    msg.humid.push({\n        x: time, y: msg.payload[key].humid\n    })\n\n    const rain = msg.payload[key].rain\n    if (rain && !lastRain){\n      msg.rain.push(time)\n      lastRain = true;\n    } else if (!rain && lastRain){\n      msg.rain.push(time)\n      lastRain = false;\n    }\n\n    const open = msg.payload[key].open\n    if (open && !lastOpen) {\n      msg.open.push(time)\n      lastOpen = true;\n    } else if (!open && lastOpen)\n      msg.open.push(time)\n  }\n}\n\nwhile (msg.rain.length > 8){\n  msg.rain.shift();\n  msg.rain.shift();\n}\n  \n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1478,7 +1480,8 @@
             [
                 "38fba2a93c25c290",
                 "c247ee52137eddc9",
-                "add389a414e31348"
+                "add389a414e31348",
+                "69a9b31b67da8433"
             ]
         ]
     },
@@ -1636,8 +1639,7 @@
         "y": 1520,
         "wires": [
             [
-                "32b4f0b18c0386d1",
-                "bce47946454db6a9"
+                "32b4f0b18c0386d1"
             ]
         ]
     },
@@ -2329,18 +2331,19 @@
         ]
     },
     {
-        "id": "bce47946454db6a9",
+        "id": "69a9b31b67da8433",
         "type": "debug",
         "z": "ca325aaf4a15f98c",
-        "name": "debug 23",
+        "name": "debug 24",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "false",
+        "complete": "rain",
+        "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 2540,
+        "x": 2240,
         "y": 1560,
         "wires": []
     },
