@@ -1,6 +1,6 @@
 [
     {
-        "id": "741c26acfa6bb7fa",
+        "id": "ca325aaf4a15f98c",
         "type": "tab",
         "label": "Welcome flow",
         "disabled": false,
@@ -8,9 +8,9 @@
         "env": []
     },
     {
-        "id": "85b15dc60f473595",
+        "id": "b5b87dd574b63a2b",
         "type": "ui_form",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "Login form",
         "label": "",
         "group": "77229db0388e207c",
@@ -48,34 +48,14 @@
         "y": 540,
         "wires": [
             [
-                "dfbc781949a4d9fd"
+                "d1a70ed9772460b3"
             ]
         ]
     },
     {
-        "id": "25168c0d93bca28f",
-        "type": "function",
-        "z": "741c26acfa6bb7fa",
-        "name": "loginCheck",
-        "func": "\nfor (let i = 0; i < msg.user.length; i++) {\n    if (JSON.stringify(msg.user[i]) === JSON.stringify(msg.loginInfo))\n      return {email: msg.user[i].email}\n  }\n  return {email: null};",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 970,
-        "y": 540,
-        "wires": [
-            [
-                "a80ea9cbf899ab4a"
-            ]
-        ]
-    },
-    {
-        "id": "6b0c85f15a37c746",
+        "id": "c1a2eef6a5905216",
         "type": "ui_button",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "Create an account?",
         "group": "77229db0388e207c",
         "order": 3,
@@ -96,14 +76,14 @@
         "y": 720,
         "wires": [
             [
-                "f6c554492a9181cb"
+                "ef4f99fb99adfc56"
             ]
         ]
     },
     {
-        "id": "cfe7ccca557271cd",
+        "id": "d81fdc13647a295a",
         "type": "ui_ui_control",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "",
         "events": "change",
         "x": 800,
@@ -113,9 +93,9 @@
         ]
     },
     {
-        "id": "f6c554492a9181cb",
+        "id": "ef4f99fb99adfc56",
         "type": "function",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "changeUI",
         "func": "msg.payload = {\n    group:{\n        hide: [\"Welcome_Login\"],\n        show: [\"Welcome_Signup\"]\n    }\n}\nreturn msg;",
         "outputs": 1,
@@ -128,46 +108,16 @@
         "y": 720,
         "wires": [
             [
-                "cfe7ccca557271cd"
+                "d81fdc13647a295a"
             ]
         ]
     },
     {
-        "id": "dbb1c3fcced7bd05",
-        "type": "inject",
-        "z": "741c26acfa6bb7fa",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": true,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 330,
-        "y": 320,
-        "wires": [
-            [
-                "263937c506e81625",
-                "f0d92cc3b3163bca"
-            ]
-        ]
-    },
-    {
-        "id": "263937c506e81625",
+        "id": "050e41da6926c88a",
         "type": "function",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "changeUI",
-        "func": "msg.payload = {\n    group:{\n        show: [\"Welcome_Login\"],\n        hide: [\"Welcome_Signup\"],\n    },\n    tabs:{\n        show: [\"Welcome\", \"Dashboard\"]\n    },\n    tab: \"Welcome\"\n}\nreturn msg;",
+        "func": "msg.payload = {\n    group: {\n        show: [\"Welcome_Login\"],\n        hide: [\"Welcome_Signup\"],\n    },\n    tabs: {\n        show: [\"Welcome\", \"Dashboard\"]\n    },\n    tab: \"Welcome\"\n}\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -178,14 +128,14 @@
         "y": 320,
         "wires": [
             [
-                "3b28aabd07645dae"
+                "2102af00efe91d1d"
             ]
         ]
     },
     {
-        "id": "3b28aabd07645dae",
+        "id": "2102af00efe91d1d",
         "type": "ui_ui_control",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "",
         "events": "change",
         "x": 800,
@@ -195,9 +145,9 @@
         ]
     },
     {
-        "id": "97e2d2591cbf0425",
+        "id": "4292b0d693484f84",
         "type": "ui_form",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "Sign up form",
         "label": "",
         "group": "40f9b51bc8382105",
@@ -235,14 +185,14 @@
         "y": 600,
         "wires": [
             [
-                "a572eb2d1b2b071e"
+                "94f185760e32ee1f"
             ]
         ]
     },
     {
-        "id": "a80ea9cbf899ab4a",
+        "id": "9446d79b6bae6eae",
         "type": "switch",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "loginCheck",
         "property": "email",
         "propertyType": "msg",
@@ -261,17 +211,17 @@
         "y": 540,
         "wires": [
             [
-                "ad4d50a698d82622"
+                "ec8208edf089f6c6"
             ],
             [
-                "55114f6bb7a1ea83"
+                "6ec9a77dc8e74084"
             ]
         ]
     },
     {
-        "id": "ad4d50a698d82622",
+        "id": "ec8208edf089f6c6",
         "type": "function",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "true",
         "func": "return msg;",
         "outputs": 1,
@@ -284,17 +234,17 @@
         "y": 840,
         "wires": [
             [
-                "5ea01cda12a25917",
-                "50ef6bf06c2409bf",
-                "243297fd9f6e46c7",
-                "ce6b33d9401073fb"
+                "f3ccdf3d76c50954",
+                "d88638c4c0d16462",
+                "6df6da944e478839",
+                "8ba91e07425409a1"
             ]
         ]
     },
     {
-        "id": "55114f6bb7a1ea83",
+        "id": "6ec9a77dc8e74084",
         "type": "function",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "false",
         "func": "msg.payload = \"Đăng nhập không thành công\"\nreturn msg;",
         "outputs": 1,
@@ -307,34 +257,35 @@
         "y": 440,
         "wires": [
             [
-                "9304efdfc2973383"
+                "730babd706f89434"
             ]
         ]
     },
     {
-        "id": "a572eb2d1b2b071e",
+        "id": "94f185760e32ee1f",
         "type": "function",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "return signupInfo",
-        "func": "msg.signupInfo = msg.payload\n\nreturn msg;",
+        "func": "msg.signupInfo = msg.payload\n\nconst user = global.get(\"user\");\n\nfor (let i = 0; i < user.length; i++) {\n    if ( user[i].email === msg.signupInfo.email)\n      return {email: null}\n  }\n\nuser.push({\n  email: msg.signupInfo.email,\n  pwd: msg.signupInfo.pwd\n})\n\nglobal.set(\"user\", user);\n\nreturn {email: msg.signupInfo.email,\npayload:{\n  email: msg.signupInfo.email,\n  pwd: msg.signupInfo.pwd\n}};\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 570,
+        "x": 830,
         "y": 600,
         "wires": [
             [
-                "40471ef208383766"
+                "02ada87a7208c5b0",
+                "091c340fe0f59166"
             ]
         ]
     },
     {
-        "id": "bf96360d4316909d",
+        "id": "02ada87a7208c5b0",
         "type": "switch",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "signupCheck",
         "property": "email",
         "propertyType": "msg",
@@ -353,17 +304,17 @@
         "y": 600,
         "wires": [
             [
-                "ad4d50a698d82622"
+                "ec8208edf089f6c6"
             ],
             [
-                "814315859f643eed"
+                "53c5957157d3730b"
             ]
         ]
     },
     {
-        "id": "4d0dbd8620fe9a91",
+        "id": "d4b2de698982cee8",
         "type": "ui_toast",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "position": "dialog",
         "displayTime": "8",
         "highlight": "",
@@ -382,9 +333,9 @@
         ]
     },
     {
-        "id": "814315859f643eed",
+        "id": "53c5957157d3730b",
         "type": "function",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "false",
         "func": "msg.payload = \"Email đã được đăng kí\"\nreturn msg;",
         "outputs": 1,
@@ -397,14 +348,14 @@
         "y": 560,
         "wires": [
             [
-                "4d0dbd8620fe9a91"
+                "d4b2de698982cee8"
             ]
         ]
     },
     {
-        "id": "01eadf99e29e9ce2",
+        "id": "d3ec87f960d50338",
         "type": "ui_button",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "Back to login",
         "group": "40f9b51bc8382105",
         "order": 3,
@@ -425,14 +376,14 @@
         "y": 660,
         "wires": [
             [
-                "28434cad5ea4c9e4"
+                "051a3ae234453051"
             ]
         ]
     },
     {
-        "id": "9a8cd3b0cc74d969",
+        "id": "f831bbf9c71cf6b8",
         "type": "ui_ui_control",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "",
         "events": "change",
         "x": 800,
@@ -442,9 +393,9 @@
         ]
     },
     {
-        "id": "28434cad5ea4c9e4",
+        "id": "051a3ae234453051",
         "type": "function",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "changeUI",
         "func": "msg.payload = {\n    group:{\n        show: [\"Welcome_Login\"],\n        hide: [\"Welcome_Signup\"]\n    }\n}\nreturn msg;",
         "outputs": 1,
@@ -457,14 +408,14 @@
         "y": 660,
         "wires": [
             [
-                "9a8cd3b0cc74d969"
+                "f831bbf9c71cf6b8"
             ]
         ]
     },
     {
-        "id": "bf99f831ed19396d",
+        "id": "f643eaef0e2d7b78",
         "type": "ui_text",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "group": "77229db0388e207c",
         "order": 1,
         "width": 0,
@@ -483,9 +434,9 @@
         "wires": []
     },
     {
-        "id": "24332145a99a25d2",
+        "id": "3e85af4ee8938708",
         "type": "ui_template",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "group": "40f9b51bc8382105",
         "name": "",
         "order": 1,
@@ -504,9 +455,9 @@
         ]
     },
     {
-        "id": "9304efdfc2973383",
+        "id": "730babd706f89434",
         "type": "ui_toast",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "position": "dialog",
         "displayTime": "8",
         "highlight": "",
@@ -525,9 +476,9 @@
         ]
     },
     {
-        "id": "50ef6bf06c2409bf",
+        "id": "d88638c4c0d16462",
         "type": "ui_text",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "group": "7991592a2dc8b4d8",
         "order": 1,
         "width": "0",
@@ -542,25 +493,25 @@
         "fontSize": "20",
         "color": "#0094ce",
         "x": 1730,
-        "y": 560,
+        "y": 440,
         "wires": []
     },
     {
-        "id": "1918ded54aaa1030",
+        "id": "6eab9ed51facaa15",
         "type": "ui_ui_control",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "",
         "events": "change",
-        "x": 1920,
-        "y": 500,
+        "x": 1940,
+        "y": 380,
         "wires": [
             []
         ]
     },
     {
-        "id": "5ea01cda12a25917",
+        "id": "f3ccdf3d76c50954",
         "type": "function",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "changeUI",
         "func": "msg.payload = {\n    tab: \"Dashboard\",\n    group: {\n        show: [\"Dashboard_Account\"]\n    }, \n    tabs:{\n        show: [\"Welcome\", \"Dashboard\"]\n    }\n}\nreturn msg;",
         "outputs": 1,
@@ -570,17 +521,17 @@
         "finalize": "",
         "libs": [],
         "x": 1720,
-        "y": 500,
+        "y": 380,
         "wires": [
             [
-                "1918ded54aaa1030"
+                "6eab9ed51facaa15"
             ]
         ]
     },
     {
-        "id": "5043d7d705ba177d",
+        "id": "f987111b64020e71",
         "type": "ui_chart",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "temp chart",
         "group": "574ae0b3482dc46e",
         "order": 3,
@@ -591,7 +542,7 @@
         "legend": "false",
         "xformat": "HH:mm:ss",
         "interpolate": "linear",
-        "nodata": "",
+        "nodata": "Chưa có dữ liệu ",
         "dot": true,
         "ymin": "0",
         "ymax": "100",
@@ -615,17 +566,17 @@
         "outputs": 1,
         "useDifferentColor": false,
         "className": "tempchart",
-        "x": 2530,
-        "y": 620,
+        "x": 2550,
+        "y": 1440,
         "wires": [
             []
         ]
     },
     {
-        "id": "a2245bcbc496e259",
+        "id": "38fba2a93c25c290",
         "type": "function",
-        "z": "741c26acfa6bb7fa",
-        "name": "Temperature chart",
+        "z": "ca325aaf4a15f98c",
+        "name": "Temperature generate",
         "func": "\n\nmsg.payload = [{\n    \"series\": [\"Nhiệt độ\"],\n    \"data\": [\n        msg.temp\n    ],\n    }]\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
@@ -633,18 +584,18 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2250,
-        "y": 620,
+        "x": 2280,
+        "y": 1440,
         "wires": [
             [
-                "5043d7d705ba177d"
+                "f987111b64020e71"
             ]
         ]
     },
     {
-        "id": "39e46839564f88be",
+        "id": "17bc35653fb41616",
         "type": "ui_button",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "logout button",
         "group": "7991592a2dc8b4d8",
         "order": 2,
@@ -661,50 +612,18 @@
         "payloadType": "str",
         "topic": "topic",
         "topicType": "msg",
-        "x": 1930,
-        "y": 560,
+        "x": 1730,
+        "y": 500,
         "wires": [
             [
-                "941974ada0b6085e"
+                "91efae4305375d70"
             ]
         ]
     },
     {
-        "id": "4d17cdc552f36dc7",
-        "type": "ui_ui_control",
-        "z": "741c26acfa6bb7fa",
-        "name": "",
-        "events": "change",
-        "x": 2520,
-        "y": 560,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "941974ada0b6085e",
-        "type": "function",
-        "z": "741c26acfa6bb7fa",
-        "name": "changeUI",
-        "func": "msg.payload = {\n    tab: \"Welcome\",\n    group: {\n        show: [\"Welcome_Login\"],\n        hide: [ \"Welcome_Signup\"],\n    }, \n    tabs:{\n        show: [\"Welcome\", \"Dashboard\"]\n    }\n}\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 2220,
-        "y": 560,
-        "wires": [
-            [
-                "4d17cdc552f36dc7"
-            ]
-        ]
-    },
-    {
-        "id": "19ba6bc6ecbda8e2",
+        "id": "2f442319b6b35d4c",
         "type": "ui_text",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "group": "40f9b51bc8382105",
         "order": 1,
         "width": 0,
@@ -723,30 +642,30 @@
         "wires": []
     },
     {
-        "id": "f0d92cc3b3163bca",
+        "id": "32921490091ffcb3",
         "type": "firebase-get",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "GET user",
         "constraint": {},
-        "database": "e5db945e350d7fe6",
+        "database": "e06e2b12d2b78bdf",
         "outputType": "auto",
         "passThrough": true,
         "path": "user",
         "pathType": "str",
         "useConstraint": false,
-        "x": 220,
-        "y": 420,
+        "x": 320,
+        "y": 440,
         "wires": [
             [
-                "7d2aea950315ee89",
-                "ca29103076f680c7"
+                "95f7a7897932930b",
+                "1cba0296e3ea46ce"
             ]
         ]
     },
     {
-        "id": "7d2aea950315ee89",
+        "id": "95f7a7897932930b",
         "type": "function",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "return msg.user",
         "func": "msg.user = []\n\nfor (let key in msg.payload) {\n  if (msg.payload.hasOwnProperty(key)) {\n    msg.user.push({\n        email: msg.payload[key].email,\n        pwd: msg.payload[key].pwd})\n    }\n}\n\nreturn msg;",
         "outputs": 1,
@@ -756,117 +675,39 @@
         "finalize": "",
         "libs": [],
         "x": 560,
-        "y": 420,
+        "y": 440,
         "wires": [
             [
-                "64ac5eeedf3b1bb1",
-                "40471ef208383766"
+                "a6d5f7a9c6e85614"
             ]
         ]
     },
     {
-        "id": "64ac5eeedf3b1bb1",
-        "type": "join",
-        "z": "741c26acfa6bb7fa",
-        "name": "",
-        "mode": "custom",
-        "build": "object",
-        "property": "",
-        "propertyType": "full",
-        "key": "topic",
-        "joiner": "\\n",
-        "joinerType": "str",
-        "accumulate": false,
-        "timeout": "",
-        "count": "2",
-        "reduceRight": false,
-        "reduceExp": "",
-        "reduceInit": "",
-        "reduceInitType": "num",
-        "reduceFixup": "",
-        "x": 790,
-        "y": 540,
-        "wires": [
-            [
-                "25168c0d93bca28f"
-            ]
-        ]
-    },
-    {
-        "id": "dfbc781949a4d9fd",
+        "id": "d1a70ed9772460b3",
         "type": "function",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "return msg.loginInfo",
-        "func": "msg.loginInfo = msg.payload\n\nreturn msg;",
+        "func": "msg.loginInfo = msg.payload\n\nconst user = global.get(\"user\");\n\nfor (let i = 0; i < user.length; i++) {\n    if (JSON.stringify(user[i]) === JSON.stringify(msg.loginInfo))\n      return {email: user[i].email}\n  }\n  return {email: null};\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 580,
+        "x": 840,
         "y": 540,
         "wires": [
             [
-                "64ac5eeedf3b1bb1"
+                "9446d79b6bae6eae"
             ]
         ]
     },
     {
-        "id": "40471ef208383766",
-        "type": "join",
-        "z": "741c26acfa6bb7fa",
-        "name": "",
-        "mode": "custom",
-        "build": "object",
-        "property": "",
-        "propertyType": "full",
-        "key": "topic",
-        "joiner": "\\n",
-        "joinerType": "str",
-        "accumulate": false,
-        "timeout": "",
-        "count": "2",
-        "reduceRight": false,
-        "reduceExp": "",
-        "reduceInit": "",
-        "reduceInitType": "num",
-        "reduceFixup": "",
-        "x": 790,
-        "y": 600,
-        "wires": [
-            [
-                "bc7dbec342270dd5"
-            ]
-        ]
-    },
-    {
-        "id": "bc7dbec342270dd5",
-        "type": "function",
-        "z": "741c26acfa6bb7fa",
-        "name": "signupCheck",
-        "func": "for (let i = 0; i < msg.user.length; i++) {\n    if (msg.user[i].email === msg.signupInfo.email)\n      return {email: null}\n  }\n\nreturn {email: msg.signupInfo.email,\npayload:{\n  email: msg.signupInfo.email,\n  pwd: msg.signupInfo.pwd\n}};",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 970,
-        "y": 600,
-        "wires": [
-            [
-                "bf96360d4316909d",
-                "0d15e9e1215ff3ef"
-            ]
-        ]
-    },
-    {
-        "id": "0d15e9e1215ff3ef",
+        "id": "091c340fe0f59166",
         "type": "firebase-out",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "",
-        "database": "e5db945e350d7fe6",
+        "database": "e06e2b12d2b78bdf",
         "path": "user",
         "pathType": "str",
         "priority": 1,
@@ -876,9 +717,9 @@
         "wires": []
     },
     {
-        "id": "2c27747a9da69a53",
+        "id": "c6d86cd7b441ecac",
         "type": "ui_template",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "group": "787779f9336aea0e",
         "name": "Nhiệt độ",
         "order": 1,
@@ -890,16 +731,16 @@
         "resendOnRefresh": true,
         "templateScope": "local",
         "className": "",
-        "x": 3020,
+        "x": 3120,
         "y": 1720,
         "wires": [
             []
         ]
     },
     {
-        "id": "68b06f92284241e8",
+        "id": "00ca5f1e29e365bd",
         "type": "ui_template",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "group": "787779f9336aea0e",
         "name": "Độ ẩm",
         "order": 2,
@@ -911,16 +752,16 @@
         "resendOnRefresh": true,
         "templateScope": "local",
         "className": "",
-        "x": 3010,
+        "x": 3110,
         "y": 1760,
         "wires": [
             []
         ]
     },
     {
-        "id": "12babc375631726b",
+        "id": "6fd7e7c32f7ba99f",
         "type": "ui_template",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "group": "787779f9336aea0e",
         "name": "Thời tiết",
         "order": 3,
@@ -932,16 +773,16 @@
         "resendOnRefresh": true,
         "templateScope": "local",
         "className": "",
-        "x": 3020,
+        "x": 3120,
         "y": 1860,
         "wires": [
             []
         ]
     },
     {
-        "id": "12bd81c1da2cd458",
+        "id": "6151741a3a96d3db",
         "type": "ui_template",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "group": "787779f9336aea0e",
         "name": "Mái che",
         "order": 4,
@@ -953,16 +794,16 @@
         "resendOnRefresh": true,
         "templateScope": "local",
         "className": "",
-        "x": 3020,
+        "x": 3120,
         "y": 1980,
         "wires": [
             []
         ]
     },
     {
-        "id": "1acc51e6359af227",
+        "id": "7511669780ad8e74",
         "type": "switch",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "SwitchWeatherUI",
         "property": "payload.isRaining",
         "propertyType": "msg",
@@ -979,21 +820,21 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 2470,
+        "x": 2570,
         "y": 1860,
         "wires": [
             [
-                "9e864d3915466ed8"
+                "15047a37f9b31452"
             ],
             [
-                "54c160f3bef2809b"
+                "891db25b368e4339"
             ]
         ]
     },
     {
-        "id": "54c160f3bef2809b",
+        "id": "891db25b368e4339",
         "type": "template",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "SunUI",
         "field": "payload",
         "fieldType": "msg",
@@ -1001,18 +842,18 @@
         "syntax": "mustache",
         "template": "{\"icon\":\"bi-cloud-sun\", \"color\":\"gold\", \"text\":\"Không mưa\"}",
         "output": "json",
-        "x": 2730,
+        "x": 2830,
         "y": 1880,
         "wires": [
             [
-                "12babc375631726b"
+                "6fd7e7c32f7ba99f"
             ]
         ]
     },
     {
-        "id": "9e864d3915466ed8",
+        "id": "15047a37f9b31452",
         "type": "template",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "RainUI",
         "field": "payload",
         "fieldType": "msg",
@@ -1020,18 +861,18 @@
         "syntax": "mustache",
         "template": "{\"icon\":\"bi-cloud-rain\", \"color\":\"cornflowerblue\", \"text\":\"Mưa\"}",
         "output": "json",
-        "x": 2730,
+        "x": 2830,
         "y": 1840,
         "wires": [
             [
-                "12babc375631726b"
+                "6fd7e7c32f7ba99f"
             ]
         ]
     },
     {
-        "id": "341dc4053ed1a3fd",
+        "id": "e79a101489a30293",
         "type": "switch",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "SwitchCanopyUI",
         "property": "payload.isOpen",
         "propertyType": "msg",
@@ -1048,21 +889,21 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 2470,
+        "x": 2570,
         "y": 1980,
         "wires": [
             [
-                "433582f4ad250d41"
+                "e1a2318b5b83bf77"
             ],
             [
-                "52d83c06d14ae056"
+                "3869b02f8584841a"
             ]
         ]
     },
     {
-        "id": "433582f4ad250d41",
+        "id": "e1a2318b5b83bf77",
         "type": "template",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "OpenUI",
         "field": "payload",
         "fieldType": "msg",
@@ -1070,18 +911,18 @@
         "syntax": "mustache",
         "template": "{\"text\":\"MỞ\"}",
         "output": "json",
-        "x": 2740,
+        "x": 2840,
         "y": 1960,
         "wires": [
             [
-                "12bd81c1da2cd458"
+                "6151741a3a96d3db"
             ]
         ]
     },
     {
-        "id": "52d83c06d14ae056",
+        "id": "3869b02f8584841a",
         "type": "template",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "CloseUI",
         "field": "payload",
         "fieldType": "msg",
@@ -1089,18 +930,18 @@
         "syntax": "mustache",
         "template": "{\"text\":\"ĐÓNG\"}",
         "output": "json",
-        "x": 2740,
+        "x": 2840,
         "y": 2000,
         "wires": [
             [
-                "12bd81c1da2cd458"
+                "6151741a3a96d3db"
             ]
         ]
     },
     {
-        "id": "841863fb26d2dd2a",
+        "id": "4417778ad4dd7d5e",
         "type": "ui_dropdown",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "AutoModeControl",
         "label": "",
         "tooltip": "",
@@ -1127,19 +968,19 @@
         "topic": "topic",
         "topicType": "msg",
         "className": "automode",
-        "x": 3070,
-        "y": 1300,
+        "x": 3150,
+        "y": 1100,
         "wires": [
             [
-                "655c7a7a1d76ce94",
-                "dba00c16647dab1e"
+                "69e852999f3fb745",
+                "d089f34f6f5059f8"
             ]
         ]
     },
     {
-        "id": "0d28703efc1e9fb3",
+        "id": "3acf4b8ba6300df7",
         "type": "ui_template",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "group": "4751b5167ce9e42d",
         "name": "Template",
         "order": 1,
@@ -1158,9 +999,9 @@
         ]
     },
     {
-        "id": "3da63b9c5db5e8f7",
+        "id": "775cc2f4de6bc85a",
         "type": "ui_switch",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "",
         "label": "Bật chế độ tự động",
         "tooltip": "",
@@ -1168,7 +1009,7 @@
         "order": 5,
         "width": "4",
         "height": "1",
-        "passthru": false,
+        "passthru": true,
         "decouple": "false",
         "topic": "topic",
         "topicType": "msg",
@@ -1183,19 +1024,19 @@
         "offcolor": "",
         "animate": false,
         "className": "mode-toggle",
-        "x": 3070,
-        "y": 1440,
+        "x": 3150,
+        "y": 1240,
         "wires": [
             [
-                "6e6ebdf4f26bf1d5",
-                "17c21ac5e3a7ec93"
+                "4eb8aae9ca78664e",
+                "6a1a99a045aced83"
             ]
         ]
     },
     {
-        "id": "54729efadc0754c8",
+        "id": "7746f1f24810b055",
         "type": "template",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "GetDefaultHumidity",
         "field": "payload",
         "fieldType": "msg",
@@ -1203,18 +1044,18 @@
         "syntax": "mustache",
         "template": "{{payload.defaultHumidity}}",
         "output": "str",
-        "x": 1950,
-        "y": 940,
+        "x": 1970,
+        "y": 740,
         "wires": [
             [
-                "5e3eb2ffc09196f9"
+                "fa44addc6191cbf7"
             ]
         ]
     },
     {
-        "id": "e50cfa883b6f7859",
+        "id": "835b422a660fe8de",
         "type": "switch",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "SwitchMode",
         "property": "payload.isAuto",
         "propertyType": "msg",
@@ -1229,21 +1070,21 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 1930,
-        "y": 1220,
+        "x": 1950,
+        "y": 1020,
         "wires": [
             [
-                "b34bc0fce3279a97"
+                "db3d91a128f461f8"
             ],
             [
-                "1b1424e955a4928c"
+                "31cb4da2b764a444"
             ]
         ]
     },
     {
-        "id": "7d15e36378a87aef",
+        "id": "114c93a8a084c3e7",
         "type": "template",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "GetAutoMode",
         "field": "payload",
         "fieldType": "msg",
@@ -1252,17 +1093,17 @@
         "template": "{{payload.autoMode}}",
         "output": "json",
         "x": 2560,
-        "y": 1300,
+        "y": 1100,
         "wires": [
             [
-                "841863fb26d2dd2a"
+                "4417778ad4dd7d5e"
             ]
         ]
     },
     {
-        "id": "b34bc0fce3279a97",
+        "id": "db3d91a128f461f8",
         "type": "template",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "SetModeAndText",
         "field": "payload",
         "fieldType": "msg",
@@ -1270,23 +1111,23 @@
         "syntax": "mustache",
         "template": "{\"isAuto\":{{payload.isAuto}}, \"autoMode\":{{payload.autoMode}}, \"text\":\"TỰ ĐỘNG\", \"switchText\":\"Bật\", \"isOpen\":{{payload.isOpen}}}",
         "output": "json",
-        "x": 2250,
-        "y": 1220,
+        "x": 2270,
+        "y": 1020,
         "wires": [
             [
-                "cd57980e7906fb21",
-                "7f07891ed313797b",
-                "66f8e19630f05fb7",
-                "a38c28c47ccd8775",
-                "7d15e36378a87aef",
-                "5eda180681d03d86"
+                "431683ab16b09557",
+                "ad9fea0c20b43f85",
+                "d118c1877a20f715",
+                "7b48c05f21349e96",
+                "114c93a8a084c3e7",
+                "1ef1dd0fd020a4fd"
             ]
         ]
     },
     {
-        "id": "1b1424e955a4928c",
+        "id": "31cb4da2b764a444",
         "type": "template",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "SetModeAndText",
         "field": "payload",
         "fieldType": "msg",
@@ -1294,23 +1135,23 @@
         "syntax": "mustache",
         "template": "{\"isAuto\":{{payload.isAuto}}, \"autoMode\":{{payload.autoMode}}, \"text\":\"THỦ CÔNG\", \"switchText\":\"Tắt\", \"isOpen\":{{payload.isOpen}}}",
         "output": "json",
-        "x": 2250,
-        "y": 1540,
+        "x": 2270,
+        "y": 1340,
         "wires": [
             [
-                "cd57980e7906fb21",
-                "8eeb2c7ffaae935b",
-                "e666e210a2ada922",
-                "5eda180681d03d86",
-                "7d15e36378a87aef",
-                "7f07891ed313797b"
+                "431683ab16b09557",
+                "f91c12adb071fa41",
+                "c971d5b19e9037e5",
+                "1ef1dd0fd020a4fd",
+                "114c93a8a084c3e7",
+                "ad9fea0c20b43f85"
             ]
         ]
     },
     {
-        "id": "cd57980e7906fb21",
+        "id": "431683ab16b09557",
         "type": "ui_template",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "group": "4751b5167ce9e42d",
         "name": "Chế độ",
         "order": 2,
@@ -1323,34 +1164,34 @@
         "templateScope": "local",
         "className": "",
         "x": 2540,
-        "y": 1400,
+        "y": 1200,
         "wires": [
             []
         ]
     },
     {
-        "id": "7f07891ed313797b",
+        "id": "ad9fea0c20b43f85",
         "type": "template",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "GetSwitchValue",
         "field": "payload",
         "fieldType": "msg",
         "format": "handlebars",
         "syntax": "mustache",
-        "template": "true",
+        "template": "{{payload.isAuto}}",
         "output": "json",
         "x": 2560,
-        "y": 1440,
+        "y": 1240,
         "wires": [
             [
-                "3da63b9c5db5e8f7"
+                "775cc2f4de6bc85a"
             ]
         ]
     },
     {
-        "id": "5eda180681d03d86",
+        "id": "1ef1dd0fd020a4fd",
         "type": "template",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "GetAwningStatus",
         "field": "payload",
         "fieldType": "msg",
@@ -1359,17 +1200,17 @@
         "template": "{{payload.isOpen}}",
         "output": "json",
         "x": 2570,
-        "y": 1340,
+        "y": 1140,
         "wires": [
             [
-                "93168d66a660e0d6"
+                "5d365ed65a4b27c0"
             ]
         ]
     },
     {
-        "id": "655c7a7a1d76ce94",
+        "id": "69e852999f3fb745",
         "type": "mqtt out",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "d": true,
         "name": "",
         "topic": "project/userChangeAutoMode",
@@ -1381,14 +1222,14 @@
         "correl": "",
         "expiry": "",
         "broker": "e603fe28287a3728",
-        "x": 3410,
-        "y": 1300,
+        "x": 3490,
+        "y": 1100,
         "wires": []
     },
     {
-        "id": "93168d66a660e0d6",
+        "id": "5d365ed65a4b27c0",
         "type": "ui_dropdown",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "AwningControl",
         "label": "",
         "tooltip": "",
@@ -1415,19 +1256,19 @@
         "topic": "topic",
         "topicType": "msg",
         "className": "automode",
-        "x": 3060,
-        "y": 1340,
+        "x": 3140,
+        "y": 1140,
         "wires": [
             [
-                "87193c794238b9ee",
-                "a1fb497663937e2f"
+                "6d2b9a6f189f0abe",
+                "30a2a1a61f4aa78d"
             ]
         ]
     },
     {
-        "id": "66f8e19630f05fb7",
+        "id": "d118c1877a20f715",
         "type": "change",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "",
         "rules": [
             {
@@ -1443,18 +1284,18 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 2780,
-        "y": 1200,
+        "x": 2860,
+        "y": 1000,
         "wires": [
             [
-                "841863fb26d2dd2a"
+                "4417778ad4dd7d5e"
             ]
         ]
     },
     {
-        "id": "a38c28c47ccd8775",
+        "id": "7b48c05f21349e96",
         "type": "change",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "",
         "rules": [
             {
@@ -1470,18 +1311,18 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 2780,
-        "y": 1240,
+        "x": 2860,
+        "y": 1040,
         "wires": [
             [
-                "93168d66a660e0d6"
+                "5d365ed65a4b27c0"
             ]
         ]
     },
     {
-        "id": "8eeb2c7ffaae935b",
+        "id": "f91c12adb071fa41",
         "type": "change",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "",
         "rules": [
             {
@@ -1497,18 +1338,18 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 2780,
-        "y": 1520,
+        "x": 2860,
+        "y": 1320,
         "wires": [
             [
-                "841863fb26d2dd2a"
+                "4417778ad4dd7d5e"
             ]
         ]
     },
     {
-        "id": "e666e210a2ada922",
+        "id": "c971d5b19e9037e5",
         "type": "change",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "",
         "rules": [
             {
@@ -1524,18 +1365,18 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 2780,
-        "y": 1560,
+        "x": 2860,
+        "y": 1360,
         "wires": [
             [
-                "93168d66a660e0d6"
+                "5d365ed65a4b27c0"
             ]
         ]
     },
     {
-        "id": "d08337e1fba44de4",
+        "id": "4923afac69f65fe9",
         "type": "mqtt in",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "",
         "topic": "project/data",
         "qos": "2",
@@ -1545,38 +1386,38 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 1930,
+        "x": 1950,
         "y": 1740,
         "wires": [
             [
-                "5b3597f9656a4656"
+                "d56c82d4995d5019"
             ]
         ]
     },
     {
-        "id": "5b3597f9656a4656",
+        "id": "d56c82d4995d5019",
         "type": "json",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "",
         "property": "payload",
         "action": "obj",
         "pretty": false,
-        "x": 2130,
+        "x": 2230,
         "y": 1740,
         "wires": [
             [
-                "1acc51e6359af227",
-                "341dc4053ed1a3fd",
-                "2c27747a9da69a53",
-                "68b06f92284241e8",
-                "9f8fad516a981767"
+                "7511669780ad8e74",
+                "e79a101489a30293",
+                "c6d86cd7b441ecac",
+                "00ca5f1e29e365bd",
+                "04707cf94020c089"
             ]
         ]
     },
     {
-        "id": "9f8fad516a981767",
+        "id": "04707cf94020c089",
         "type": "delay",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "",
         "pauseType": "rate",
         "timeout": "5",
@@ -1590,60 +1431,61 @@
         "drop": true,
         "allowrate": false,
         "outputs": 1,
-        "x": 2460,
+        "x": 2560,
         "y": 1660,
         "wires": [
             [
-                "33765b7fa2ab9448"
+                "d2ac02c3b0d66894"
             ]
         ]
     },
     {
-        "id": "243297fd9f6e46c7",
+        "id": "6df6da944e478839",
         "type": "firebase-get",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "GET data",
         "constraint": {},
-        "database": "e5db945e350d7fe6",
+        "database": "e06e2b12d2b78bdf",
         "outputType": "auto",
         "passThrough": true,
         "path": "data",
         "pathType": "str",
         "useConstraint": false,
         "x": 1720,
-        "y": 620,
+        "y": 1440,
         "wires": [
             [
-                "294b8adb90f0fcdf"
+                "6f12e91f7d401504",
+                "fc6afa1d2c77f9a3"
             ]
         ]
     },
     {
-        "id": "294b8adb90f0fcdf",
+        "id": "6f12e91f7d401504",
         "type": "function",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "return data ",
-        "func": "\n\nmsg.temp = []\nmsg.humid = []\nmsg.rain = []\nmsg.open = []\nvar lastRain = false;\nvar lastOpen = false;\n\nfor (let key in msg.payload) {\n  if (msg.payload.hasOwnProperty(key)){ \n    const time = msg.payload[key].time\n    msg.temp.push({\n        x: time, y: msg.payload[key].temp})\n    msg.humid.push({\n        x: time, y: msg.payload[key].humid\n    })\n\n    const rain = msg.payload[key].rain\n    if (rain && !lastRain){\n      msg.rain.push(time)\n      lastRain = true;\n    } else if (!rain && lastRain)\n      msg.rain.push(time)\n\n    const open = msg.payload[key].open\n    if (open && !lastOpen) {\n      msg.open.push(time)\n      lastOpen = true;\n    } else if (!open && lastOpen)\n      msg.open.push(time)\n  }\n}\n\nreturn msg;",
+        "func": "msg.temp = []\nmsg.humid = []\nmsg.rain = []\nmsg.open = []\nvar lastRain = false;\nvar lastOpen = false;\n\nfor (let key in msg.payload) {\n  if (msg.payload.hasOwnProperty(key)){ \n    const time = msg.payload[key].time\n    msg.temp.push({\n        x: time, y: msg.payload[key].temp})\n    msg.humid.push({\n        x: time, y: msg.payload[key].humid\n    })\n\n    const rain = msg.payload[key].rain\n    if (rain && !lastRain){\n      msg.rain.push(time)\n      lastRain = true;\n    } else if (!rain && lastRain)\n      msg.rain.push(time)\n\n    const open = msg.payload[key].open\n    if (open && !lastOpen) {\n      msg.open.push(time)\n      lastOpen = true;\n    } else if (!open && lastOpen)\n      msg.open.push(time)\n  }\n}\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1930,
-        "y": 620,
+        "x": 1950,
+        "y": 1440,
         "wires": [
             [
-                "a2245bcbc496e259",
-                "ef66d80b405c38bf",
-                "4116c5a2d7e4ec8d"
+                "38fba2a93c25c290",
+                "c247ee52137eddc9",
+                "add389a414e31348"
             ]
         ]
     },
     {
-        "id": "8e411b716d91a02a",
+        "id": "faa6a630d34a7ed5",
         "type": "inject",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "d": true,
         "name": "",
         "props": [
@@ -1657,23 +1499,23 @@
         ],
         "repeat": "",
         "crontab": "",
-        "once": true,
+        "once": false,
         "onceDelay": 0.1,
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 410,
+        "x": 400,
         "y": 960,
         "wires": [
             [
-                "4baf6da47fdc4cbb"
+                "c18e850c894dfc0a"
             ]
         ]
     },
     {
-        "id": "cf1cde47b359b330",
+        "id": "bc34edc397ae8921",
         "type": "ui_chart",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "humidchart",
         "group": "574ae0b3482dc46e",
         "order": 4,
@@ -1684,13 +1526,13 @@
         "legend": "false",
         "xformat": "HH:mm:ss",
         "interpolate": "linear",
-        "nodata": "",
+        "nodata": "Chưa có dữ liệu ",
         "dot": true,
         "ymin": "0",
         "ymax": "100",
-        "removeOlder": "30",
+        "removeOlder": "1",
         "removeOlderPoints": "",
-        "removeOlderUnit": "1",
+        "removeOlderUnit": "3600",
         "cutout": 0,
         "useOneColor": true,
         "useUTC": false,
@@ -1708,17 +1550,17 @@
         "outputs": 1,
         "useDifferentColor": false,
         "className": "humidchart",
-        "x": 2530,
-        "y": 660,
+        "x": 2550,
+        "y": 1480,
         "wires": [
             []
         ]
     },
     {
-        "id": "ef66d80b405c38bf",
+        "id": "c247ee52137eddc9",
         "type": "function",
-        "z": "741c26acfa6bb7fa",
-        "name": "Humidity chart",
+        "z": "ca325aaf4a15f98c",
+        "name": "Humidity generate",
         "func": "\nmsg.payload = [{\n    \"series\": [\"Độ ẩm\"],\n    \"data\": [\n        msg.humid\n    ],\n    }]\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
@@ -1726,29 +1568,29 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2240,
-        "y": 660,
+        "x": 2270,
+        "y": 1480,
         "wires": [
             [
-                "cf1cde47b359b330"
+                "bc34edc397ae8921"
             ]
         ]
     },
     {
-        "id": "38a73bbd69ef3c4f",
+        "id": "32b4f0b18c0386d1",
         "type": "ui_chart",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "Rain chart",
         "group": "574ae0b3482dc46e",
         "order": 5,
         "width": "12",
-        "height": "2",
-        "label": "Mưa",
+        "height": "3",
+        "label": "Thời gian mưa",
         "chartType": "line",
         "legend": "false",
         "xformat": "HH:mm:ss",
         "interpolate": "linear",
-        "nodata": "Không có mưa",
+        "nodata": "Empty",
         "dot": true,
         "ymin": "0",
         "ymax": "2",
@@ -1772,17 +1614,17 @@
         "outputs": 1,
         "useDifferentColor": false,
         "className": "rainchart",
-        "x": 2530,
-        "y": 700,
+        "x": 2550,
+        "y": 1520,
         "wires": [
             []
         ]
     },
     {
-        "id": "4116c5a2d7e4ec8d",
+        "id": "add389a414e31348",
         "type": "function",
-        "z": "741c26acfa6bb7fa",
-        "name": "graph generate",
+        "z": "ca325aaf4a15f98c",
+        "name": "Rain generate",
         "func": "var rainChartData = []\nvar rainChartSeries = []\n\nfor (let i = 0; i < msg.rain.length / 2; i++){\n    rainChartSeries.push(`Lần ${i+1}`)\n    const time2 = msg.rain[i*2+1] \n    ? msg.rain[i*2+1] \n    : (new Date()).getTime()\n\n    rainChartData.push([\n        {x: msg.rain[i*2], y: 1},\n        {x: time2, y: 1}\n    ])\n}\n\nmsg.payload = [{\n    \"series\": rainChartSeries,\n    \"data\": rainChartData\n    }]\n\nreturn msg;",
         "outputs": 1,
         "timeout": "",
@@ -1790,43 +1632,43 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2240,
-        "y": 700,
+        "x": 2260,
+        "y": 1520,
         "wires": [
             [
-                "38a73bbd69ef3c4f"
+                "32b4f0b18c0386d1",
+                "bce47946454db6a9"
             ]
         ]
     },
     {
-        "id": "2af9a6eef0a1c065",
+        "id": "11f2446ba1b76732",
         "type": "comment",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "",
         "info": "- giới hạn lại thời gian ở chart\n",
-        "x": 540,
-        "y": 80,
+        "x": 660,
+        "y": 180,
         "wires": []
     },
     {
-        "id": "be7ba0e7e4b951f5",
+        "id": "76b5ac208512258e",
         "type": "firebase-out",
-        "z": "741c26acfa6bb7fa",
-        "d": true,
+        "z": "ca325aaf4a15f98c",
         "name": "",
-        "database": "e5db945e350d7fe6",
+        "database": "e06e2b12d2b78bdf",
         "path": "data",
         "pathType": "str",
         "priority": 1,
         "queryType": "push",
-        "x": 3030,
+        "x": 3130,
         "y": 1660,
         "wires": []
     },
     {
-        "id": "33765b7fa2ab9448",
+        "id": "d2ac02c3b0d66894",
         "type": "function",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "return necessary data",
         "func": "const info = {\n    temp: msg.payload.temperature,\n    humid: msg.payload.humidity,\n    rain: msg.payload.isRaining,\n    open: msg.payload.isOpen,\n    time: (new Date()).getTime()\n}\n\nmsg.payload = info\n\nreturn msg;",
         "outputs": 1,
@@ -1835,21 +1677,22 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2780,
+        "x": 2880,
         "y": 1660,
         "wires": [
             [
-                "be7ba0e7e4b951f5"
+                "76b5ac208512258e"
             ]
         ]
     },
     {
-        "id": "4baf6da47fdc4cbb",
+        "id": "c18e850c894dfc0a",
         "type": "firebase-get",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
+        "d": true,
         "name": "",
         "constraint": {},
-        "database": "e5db945e350d7fe6",
+        "database": "e06e2b12d2b78bdf",
         "outputType": "auto",
         "passThrough": true,
         "path": "default",
@@ -1859,14 +1702,14 @@
         "y": 940,
         "wires": [
             [
-                "a36865899d97ba1a"
+                "3aedf1ccd6c6d4c3"
             ]
         ]
     },
     {
-        "id": "a36865899d97ba1a",
+        "id": "3aedf1ccd6c6d4c3",
         "type": "debug",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "debug 18",
         "active": true,
         "tosidebar": true,
@@ -1881,9 +1724,9 @@
         "wires": []
     },
     {
-        "id": "6249db9a878ef419",
+        "id": "6ec1432142552ecf",
         "type": "template",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "GetDefaultTemperature",
         "field": "payload",
         "fieldType": "msg",
@@ -1891,18 +1734,18 @@
         "syntax": "mustache",
         "template": "{{payload.defaultTemperature}}",
         "output": "str",
-        "x": 1970,
-        "y": 840,
+        "x": 1990,
+        "y": 640,
         "wires": [
             [
-                "65c4270ef6519569"
+                "5b5d4b6cbd2a2724"
             ]
         ]
     },
     {
-        "id": "65c4270ef6519569",
+        "id": "5b5d4b6cbd2a2724",
         "type": "ui_numeric",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "",
         "label": "Nhiệt độ mở mái che",
         "tooltip": "",
@@ -1919,19 +1762,19 @@
         "max": "100",
         "step": 1,
         "className": "default-temperature",
-        "x": 2260,
-        "y": 840,
+        "x": 2280,
+        "y": 640,
         "wires": [
             [
-                "ac0f4cf0d2a75af8",
-                "53aa4737d24c837f"
+                "1dadd951ce024257",
+                "bda1a9823553518a"
             ]
         ]
     },
     {
-        "id": "5e3eb2ffc09196f9",
+        "id": "fa44addc6191cbf7",
         "type": "ui_numeric",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "",
         "label": "Độ ẩm báo động",
         "tooltip": "",
@@ -1948,19 +1791,19 @@
         "max": "100",
         "step": 1,
         "className": "default-humidity",
-        "x": 2250,
-        "y": 940,
+        "x": 2270,
+        "y": 740,
         "wires": [
             [
-                "3cef567e216433df",
-                "ef2773efa7320ee6"
+                "66e950fd468239fc",
+                "0ba0a87aecab49c9"
             ]
         ]
     },
     {
-        "id": "521ef9dd4f45f11b",
+        "id": "5ae7045e44f131db",
         "type": "ui_button",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "",
         "group": "9f5f0337d40a444f",
         "order": 3,
@@ -1977,19 +1820,19 @@
         "payloadType": "json",
         "topic": "topic",
         "topicType": "msg",
-        "x": 2270,
-        "y": 1040,
+        "x": 2290,
+        "y": 840,
         "wires": [
             [
-                "a868c78734c0f3fa",
-                "9e971bb42090402b"
+                "9e8bc3506e2117a7",
+                "80e14983d7f08299"
             ]
         ]
     },
     {
-        "id": "a868c78734c0f3fa",
+        "id": "9e8bc3506e2117a7",
         "type": "mqtt out",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "d": true,
         "name": "",
         "topic": "project/userSetDefaultValues",
@@ -2001,14 +1844,14 @@
         "correl": "",
         "expiry": "",
         "broker": "e603fe28287a3728",
-        "x": 2580,
-        "y": 1040,
+        "x": 2600,
+        "y": 840,
         "wires": []
     },
     {
-        "id": "3cef567e216433df",
+        "id": "66e950fd468239fc",
         "type": "mqtt out",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "d": true,
         "name": "",
         "topic": "project/userSetDefaultHumid",
@@ -2020,14 +1863,14 @@
         "correl": "",
         "expiry": "",
         "broker": "e603fe28287a3728",
-        "x": 2580,
-        "y": 940,
+        "x": 2600,
+        "y": 740,
         "wires": []
     },
     {
-        "id": "ac0f4cf0d2a75af8",
+        "id": "1dadd951ce024257",
         "type": "mqtt out",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "d": true,
         "name": "",
         "topic": "project/userSetDefaultTemp",
@@ -2039,50 +1882,50 @@
         "correl": "",
         "expiry": "",
         "broker": "e603fe28287a3728",
-        "x": 2580,
-        "y": 840,
+        "x": 2600,
+        "y": 640,
         "wires": []
     },
     {
-        "id": "ce6b33d9401073fb",
+        "id": "8ba91e07425409a1",
         "type": "firebase-get",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "GET setting",
         "constraint": {},
-        "database": "e5db945e350d7fe6",
+        "database": "e06e2b12d2b78bdf",
         "outputType": "auto",
         "passThrough": false,
         "path": "setting",
         "pathType": "str",
         "useConstraint": false,
-        "x": 1710,
-        "y": 840,
+        "x": 1730,
+        "y": 640,
         "wires": [
             [
-                "6249db9a878ef419",
-                "54729efadc0754c8",
-                "e50cfa883b6f7859"
+                "6ec1432142552ecf",
+                "7746f1f24810b055",
+                "835b422a660fe8de"
             ]
         ]
     },
     {
-        "id": "e8c0e30fb9d37b61",
+        "id": "dcd4eb89066d359a",
         "type": "firebase-out",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "",
-        "database": "e5db945e350d7fe6",
+        "database": "e06e2b12d2b78bdf",
         "path": "setting",
         "pathType": "str",
         "priority": 1,
         "queryType": "update",
-        "x": 2840,
-        "y": 880,
+        "x": 2860,
+        "y": 680,
         "wires": []
     },
     {
-        "id": "53aa4737d24c837f",
+        "id": "bda1a9823553518a",
         "type": "function",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "return payload",
         "func": "msg.payload = {\"defaultTemperature\": msg.payload}\nreturn msg;",
         "outputs": 1,
@@ -2091,18 +1934,18 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2540,
-        "y": 880,
+        "x": 2560,
+        "y": 680,
         "wires": [
             [
-                "e8c0e30fb9d37b61"
+                "dcd4eb89066d359a"
             ]
         ]
     },
     {
-        "id": "ef2773efa7320ee6",
+        "id": "0ba0a87aecab49c9",
         "type": "function",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "return payload",
         "func": "msg.payload = {\"defaultHumidity\": msg.payload}\nreturn msg;",
         "outputs": 1,
@@ -2111,46 +1954,46 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2540,
-        "y": 980,
+        "x": 2560,
+        "y": 780,
         "wires": [
             [
-                "f7f1374a6f7d93c9"
+                "9929e975cc2b2e1f"
             ]
         ]
     },
     {
-        "id": "f7f1374a6f7d93c9",
+        "id": "9929e975cc2b2e1f",
         "type": "firebase-out",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "",
-        "database": "e5db945e350d7fe6",
+        "database": "e06e2b12d2b78bdf",
         "path": "setting",
         "pathType": "str",
         "priority": 1,
         "queryType": "update",
-        "x": 2840,
-        "y": 980,
+        "x": 2860,
+        "y": 780,
         "wires": []
     },
     {
-        "id": "b5d0194b76d93464",
+        "id": "0ce412d03e97bce7",
         "type": "firebase-out",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "",
-        "database": "e5db945e350d7fe6",
+        "database": "e06e2b12d2b78bdf",
         "path": "setting",
         "pathType": "str",
         "priority": 1,
         "queryType": "update",
-        "x": 2840,
-        "y": 1080,
+        "x": 2860,
+        "y": 880,
         "wires": []
     },
     {
-        "id": "9e971bb42090402b",
+        "id": "80e14983d7f08299",
         "type": "function",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "return payload",
         "func": "msg.payload = {\n    \"defaultHumidity\": 80,\n    \"defaultTemperature\": 35\n}\nreturn msg;",
         "outputs": 1,
@@ -2159,34 +2002,18 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2540,
-        "y": 1080,
+        "x": 2560,
+        "y": 880,
         "wires": [
             [
-                "b5d0194b76d93464"
+                "0ce412d03e97bce7"
             ]
         ]
     },
     {
-        "id": "ca29103076f680c7",
-        "type": "debug",
-        "z": "741c26acfa6bb7fa",
-        "name": "debug 19",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 410,
-        "y": 480,
-        "wires": []
-    },
-    {
-        "id": "dba00c16647dab1e",
+        "id": "d089f34f6f5059f8",
         "type": "function",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "return payload",
         "func": "msg.payload = {\n    \"autoMode\": msg.payload\n}\nreturn msg;",
         "outputs": 1,
@@ -2195,18 +2022,18 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 3360,
-        "y": 1260,
+        "x": 3440,
+        "y": 1060,
         "wires": [
             [
-                "c6736a176d10031b"
+                "3a93b023bdac9e0b"
             ]
         ]
     },
     {
-        "id": "6e6ebdf4f26bf1d5",
+        "id": "4eb8aae9ca78664e",
         "type": "mqtt out",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "d": true,
         "name": "",
         "topic": "project/userChangeMode",
@@ -2217,16 +2044,15 @@
         "userProps": "",
         "correl": "",
         "expiry": "",
-        "broker": "996140b2cebf7259",
-        "x": 3390,
-        "y": 1440,
+        "broker": "18af26a4e9951e61",
+        "x": 3470,
+        "y": 1240,
         "wires": []
     },
     {
-        "id": "87193c794238b9ee",
+        "id": "6d2b9a6f189f0abe",
         "type": "mqtt out",
-        "z": "741c26acfa6bb7fa",
-        "d": true,
+        "z": "ca325aaf4a15f98c",
         "name": "",
         "topic": "project/userOpenAwning",
         "qos": "",
@@ -2236,15 +2062,15 @@
         "userProps": "",
         "correl": "",
         "expiry": "",
-        "broker": "996140b2cebf7259",
-        "x": 3390,
-        "y": 1340,
+        "broker": "18af26a4e9951e61",
+        "x": 3470,
+        "y": 1140,
         "wires": []
     },
     {
-        "id": "721f245b77b65fdb",
+        "id": "b7ef19597d34a7b2",
         "type": "inject",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "",
         "props": [
             {
@@ -2262,32 +2088,32 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 1410,
-        "y": 980,
+        "x": 1730,
+        "y": 560,
         "wires": [
             [
-                "ce6b33d9401073fb"
+                "8ba91e07425409a1"
             ]
         ]
     },
     {
-        "id": "66b092ac5a3fe0a2",
+        "id": "d0aa4fbb0ee9ce93",
         "type": "firebase-out",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "",
-        "database": "e5db945e350d7fe6",
+        "database": "e06e2b12d2b78bdf",
         "path": "setting",
         "pathType": "str",
         "priority": 1,
         "queryType": "update",
-        "x": 3660,
-        "y": 1480,
+        "x": 3740,
+        "y": 1280,
         "wires": []
     },
     {
-        "id": "17c21ac5e3a7ec93",
+        "id": "6a1a99a045aced83",
         "type": "function",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "return payload",
         "func": "msg.payload = {\n    \"isAuto\": msg.payload\n}\nreturn msg;",
         "outputs": 1,
@@ -2296,32 +2122,32 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 3360,
-        "y": 1480,
+        "x": 3440,
+        "y": 1280,
         "wires": [
             [
-                "66b092ac5a3fe0a2"
+                "d0aa4fbb0ee9ce93"
             ]
         ]
     },
     {
-        "id": "f50c6ff626fb1535",
+        "id": "cc33ac5142482c8a",
         "type": "firebase-out",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "",
-        "database": "e5db945e350d7fe6",
+        "database": "e06e2b12d2b78bdf",
         "path": "setting",
         "pathType": "str",
         "priority": 1,
         "queryType": "update",
-        "x": 3660,
-        "y": 1380,
+        "x": 3740,
+        "y": 1180,
         "wires": []
     },
     {
-        "id": "a1fb497663937e2f",
+        "id": "30a2a1a61f4aa78d",
         "type": "function",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "return payload",
         "func": "msg.payload = {\n    \"isOpen\": msg.payload\n}\nreturn msg;",
         "outputs": 1,
@@ -2330,26 +2156,192 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 3360,
-        "y": 1380,
+        "x": 3440,
+        "y": 1180,
         "wires": [
             [
-                "f50c6ff626fb1535"
+                "cc33ac5142482c8a"
             ]
         ]
     },
     {
-        "id": "c6736a176d10031b",
+        "id": "3a93b023bdac9e0b",
         "type": "firebase-out",
-        "z": "741c26acfa6bb7fa",
+        "z": "ca325aaf4a15f98c",
         "name": "",
-        "database": "e5db945e350d7fe6",
+        "database": "e06e2b12d2b78bdf",
         "path": "setting",
         "pathType": "str",
         "priority": 1,
         "queryType": "update",
-        "x": 3660,
-        "y": 1260,
+        "x": 3740,
+        "y": 1060,
+        "wires": []
+    },
+    {
+        "id": "1cba0296e3ea46ce",
+        "type": "debug",
+        "z": "ca325aaf4a15f98c",
+        "name": "debug 20",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 540,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "5ba93ead7e2702e8",
+        "type": "inject",
+        "z": "ca325aaf4a15f98c",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 330,
+        "y": 320,
+        "wires": [
+            [
+                "050e41da6926c88a",
+                "32921490091ffcb3"
+            ]
+        ]
+    },
+    {
+        "id": "91efae4305375d70",
+        "type": "function",
+        "z": "ca325aaf4a15f98c",
+        "name": "changeUI",
+        "func": "msg.payload = {\n    tab: \"Welcome\",\n    group: {\n        show: [\"Welcome_Login\"],\n        hide: [ \"Welcome_Signup\"],\n    }, \n    tabs:{\n        show: [\"Welcome\", \"Dashboard\"]\n    }\n}\nmsg.reset = 1\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1940,
+        "y": 500,
+        "wires": [
+            [
+                "18edb5dc835edb4c"
+            ]
+        ]
+    },
+    {
+        "id": "18edb5dc835edb4c",
+        "type": "ui_ui_control",
+        "z": "ca325aaf4a15f98c",
+        "name": "",
+        "events": "change",
+        "x": 2240,
+        "y": 500,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a6d5f7a9c6e85614",
+        "type": "change",
+        "z": "ca325aaf4a15f98c",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "user",
+                "pt": "global",
+                "to": "user",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 820,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "fc6afa1d2c77f9a3",
+        "type": "debug",
+        "z": "ca325aaf4a15f98c",
+        "name": "debug 22",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1850,
+        "y": 1340,
+        "wires": []
+    },
+    {
+        "id": "ed6d3bd499be51c7",
+        "type": "inject",
+        "z": "ca325aaf4a15f98c",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "25",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1780,
+        "y": 1620,
+        "wires": [
+            [
+                "6df6da944e478839"
+            ]
+        ]
+    },
+    {
+        "id": "bce47946454db6a9",
+        "type": "debug",
+        "z": "ca325aaf4a15f98c",
+        "name": "debug 23",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2540,
+        "y": 1560,
         "wires": []
     },
     {
@@ -2397,9 +2389,9 @@
         "className": ""
     },
     {
-        "id": "e5db945e350d7fe6",
+        "id": "e06e2b12d2b78bdf",
         "type": "database-config",
-        "name": "Firebase",
+        "name": "My Database",
         "authType": "anonymous",
         "claims": {},
         "createUser": false,
@@ -2470,7 +2462,7 @@
         "className": ""
     },
     {
-        "id": "996140b2cebf7259",
+        "id": "18af26a4e9951e61",
         "type": "mqtt-broker",
         "name": "",
         "broker": "test.mosquitto.org",
