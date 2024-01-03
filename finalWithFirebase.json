@@ -444,7 +444,7 @@
         "order": 1,
         "width": 0,
         "height": 0,
-        "format": "<style>\n#Welcome_Login,\n#Welcome_Signup{\n    margin-top: 6rem !important;\n}\n\n.welcome-text{\n    font-weight: 650;\n}\n\n.loginform, .signupform{\n    margin: 0.5rem auto !important;\n    max-width: 25rem;\n    position: absolute !important;\n    top: 20% !important;\n    left: 33.5% !important;\n    /* margin-top: 0.5rem !important; */\n}\n\n.loginform [type=submit],\n.signupform [type=submit]{\n    max-width: 10rem;\n    max-height: 3rem;\n    line-height: 3rem !important;\n}\n\n.createacc-button{\n    max-width: 10rem;\n    max-height: 3rem;\n    position: absolute !important;\n    top: 75% !important;\n    left: 43% !important;\n}\n\n.back-button{\n    max-width: 10rem;\n    max-height: 3rem;\n    position: absolute !important;\n    top: 75% !important;\n    left: 43% !important;\n}\n\n.logout-button{\n    max-width: 8rem !important;\n    max-height: 3rem;\n    line-height: 3rem !important;\n    position: absolute !important;\n    top: 2rem !important;\n    left: 68rem !important;\n}\n\n.humidchart{\n    margin-left: 6rem !important;\n}\n\n.humidchart,\n.tempchart{\n    margin-top: 6rem !important;\n}\n\n.rainchart{\n    top: 45rem !important;\n}\n\n#Dashboard_Account_cards{\n     margin-top: 0rem !important;\n     margin-bottom: 0rem !important;\n}\n\n</style>",
+        "format": "<style>\n#Welcome_Login,\n#Welcome_Signup{\n    margin-top: 6rem !important;\n}\n\n.welcome-text{\n    font-weight: 650;\n}\n\n.loginform, .signupform{\n    margin: 0.5rem auto !important;\n    max-width: 25rem;\n    position: absolute !important;\n    top: 20% !important;\n    left: 33.5% !important;\n    /* margin-top: 0.5rem !important; */\n}\n\n.loginform [type=submit],\n.signupform [type=submit]{\n    max-width: 10rem;\n    max-height: 3rem;\n    line-height: 3rem !important;\n}\n\n.createacc-button{\n    max-width: 10rem;\n    max-height: 3rem;\n    position: absolute !important;\n    top: 75% !important;\n    left: 43% !important;\n}\n\n.back-button{\n    max-width: 10rem;\n    max-height: 3rem;\n    position: absolute !important;\n    top: 75% !important;\n    left: 43% !important;\n}\n\n.logout-button{\n    max-width: 8rem !important;\n    max-height: 3rem;\n    line-height: 3rem !important;\n    position: absolute !important;\n    top: 2rem !important;\n    left: 68rem !important;\n}\n\n.humidchart{\n    margin-left: 6rem !important;\n}\n\n.humidchart,\n.tempchart{\n    margin-top: 6rem !important;\n}\n\n.nr-dashboard-ui_statetrail{\n    top: 40rem !important;\n}\n\n.label_rainchart{\n    top: 40rem !important;\n    font-weight: 500;\n    height: 3rem !important;\n}\n\n#Dashboard_Account_cards{\n     margin-top: 0rem !important;\n     margin-bottom: 0rem !important;\n}\n\n</style>",
         "storeOutMessages": true,
         "fwdInMessages": true,
         "resendOnRefresh": true,
@@ -536,7 +536,7 @@
         "z": "ca325aaf4a15f98c",
         "name": "temp chart",
         "group": "574ae0b3482dc46e",
-        "order": 3,
+        "order": 1,
         "width": "5",
         "height": "5",
         "label": "Nhiệt độ (°C)",
@@ -1467,7 +1467,7 @@
         "type": "function",
         "z": "ca325aaf4a15f98c",
         "name": "return data ",
-        "func": "msg.temp = []\nmsg.humid = []\nmsg.rain = []\nmsg.open = []\nvar lastRain = false;\nvar lastOpen = false;\n\nfor (let key in msg.payload) {\n  if (msg.payload.hasOwnProperty(key)){ \n    const time = msg.payload[key].time\n    msg.temp.push({\n        x: time, y: msg.payload[key].temp})\n    msg.humid.push({\n        x: time, y: msg.payload[key].humid\n    })\n\n    const rain = msg.payload[key].rain\n    if (rain && !lastRain){\n      msg.rain.push(time)\n      lastRain = true;\n    } else if (!rain && lastRain){\n      msg.rain.push(time)\n      lastRain = false;\n    }\n\n    const open = msg.payload[key].open\n    if (open && !lastOpen) {\n      msg.open.push(time)\n      lastOpen = true;\n    } else if (!open && lastOpen)\n      msg.open.push(time)\n  }\n}\n\nwhile (msg.rain.length > 8){\n  msg.rain.shift();\n  msg.rain.shift();\n}\n  \n\nreturn msg;",
+        "func": "msg.temp = []\nmsg.humid = []\nmsg.rain = []\nmsg.open = []\nvar lastRain = false;\nvar lastOpen = false;\n\nfor (let key in msg.payload) {\n  if (msg.payload.hasOwnProperty(key)){ \n    const time = msg.payload[key].time\n    msg.temp.push({\n        x: time, y: msg.payload[key].temp})\n    msg.humid.push({\n        x: time, y: msg.payload[key].humid\n    })\n\n    const rain = msg.payload[key].rain\n    if (msg.rain.length == 0 || lastRain != rain){\n      msg.rain.push({state: rain, timestamp: time})\n      lastRain = rain\n    } \n    // if (rain && !lastRain){\n    //   msg.rain.push(time)\n    //   lastRain = true;\n    // } else if (!rain && lastRain){\n    //   msg.rain.push(time)\n    //   lastRain = false;\n    // }\n\n    const open = msg.payload[key].open\n    if (open && !lastOpen) {\n      msg.open.push(time)\n      lastOpen = true;\n    } else if (!open && lastOpen)\n      msg.open.push(time)\n  }\n}\n  \nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1480,8 +1480,7 @@
             [
                 "38fba2a93c25c290",
                 "c247ee52137eddc9",
-                "add389a414e31348",
-                "69a9b31b67da8433"
+                "add389a414e31348"
             ]
         ]
     },
@@ -1521,7 +1520,7 @@
         "z": "ca325aaf4a15f98c",
         "name": "humidchart",
         "group": "574ae0b3482dc46e",
-        "order": 4,
+        "order": 2,
         "width": "5",
         "height": "5",
         "label": "Độ ẩm (%)",
@@ -1580,55 +1579,11 @@
         ]
     },
     {
-        "id": "32b4f0b18c0386d1",
-        "type": "ui_chart",
-        "z": "ca325aaf4a15f98c",
-        "name": "Rain chart",
-        "group": "574ae0b3482dc46e",
-        "order": 5,
-        "width": "12",
-        "height": "3",
-        "label": "Thời gian mưa",
-        "chartType": "line",
-        "legend": "false",
-        "xformat": "HH:mm:ss",
-        "interpolate": "linear",
-        "nodata": "Empty",
-        "dot": true,
-        "ymin": "0",
-        "ymax": "2",
-        "removeOlder": "24",
-        "removeOlderPoints": "1000",
-        "removeOlderUnit": "3600",
-        "cutout": 0,
-        "useOneColor": false,
-        "useUTC": false,
-        "colors": [
-            "#0094fd",
-            "#0094fd",
-            "#0094fd",
-            "#0093fc",
-            "#0093fb",
-            "#0092f9",
-            "#008cf0",
-            "#0094fd",
-            "#0094fd"
-        ],
-        "outputs": 1,
-        "useDifferentColor": false,
-        "className": "rainchart",
-        "x": 2550,
-        "y": 1520,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "add389a414e31348",
         "type": "function",
         "z": "ca325aaf4a15f98c",
         "name": "Rain generate",
-        "func": "var rainChartData = []\nvar rainChartSeries = []\n\nfor (let i = 0; i < msg.rain.length / 2; i++){\n    rainChartSeries.push(`Lần ${i+1}`)\n    const time2 = msg.rain[i*2+1] \n    ? msg.rain[i*2+1] \n    : (new Date()).getTime()\n\n    rainChartData.push([\n        {x: msg.rain[i*2], y: 1},\n        {x: time2, y: 1}\n    ])\n}\n\nmsg.payload = [{\n    \"series\": rainChartSeries,\n    \"data\": rainChartData\n    }]\n\nreturn msg;",
+        "func": "// var rainChartData = []\n// var rainChartSeries = []\n\n// for (let i = 0; i < msg.rain.length / 2; i++){\n//     rainChartSeries.push(`Lần ${i+1}`)\n//     const time2 = msg.rain[i*2+1] \n//     ? msg.rain[i*2+1] \n//     : (new Date()).getTime()\n\n//     rainChartData.push([\n//         {x: msg.rain[i*2], y: 1},\n//         {x: time2, y: 1}\n//     ])\n// }\n\n// msg.payload = [{\n//     \"series\": rainChartSeries,\n//     \"data\": rainChartData\n//     }]\n\nmsg.payload = [\n            ...msg.rain]\nreturn msg;",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -1639,7 +1594,9 @@
         "y": 1520,
         "wires": [
             [
-                "32b4f0b18c0386d1"
+                "729ccaf1a376cced",
+                "c9099a93ce6dee0d",
+                "7b83ad3d92adf979"
             ]
         ]
     },
@@ -2331,20 +2288,80 @@
         ]
     },
     {
-        "id": "69a9b31b67da8433",
+        "id": "729ccaf1a376cced",
+        "type": "ui_statetrail",
+        "z": "ca325aaf4a15f98c",
+        "group": "574ae0b3482dc46e",
+        "order": 4,
+        "width": "12",
+        "height": "2",
+        "name": "rainchart",
+        "label": "",
+        "states": [
+            {
+                "state": true,
+                "col": "#0094fd",
+                "t": "bool",
+                "label": "Có mưa"
+            },
+            {
+                "state": false,
+                "col": "#999999",
+                "t": "bool",
+                "label": "Không có mưa"
+            }
+        ],
+        "periodLimit": "24",
+        "periodLimitUnit": "3600",
+        "timeformat": "HH:mm",
+        "tickmarks": 4,
+        "exactticks": true,
+        "persist": false,
+        "legend": "1",
+        "combine": true,
+        "blanklabel": "blank",
+        "x": 2540,
+        "y": 1520,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c9099a93ce6dee0d",
+        "type": "ui_text",
+        "z": "ca325aaf4a15f98c",
+        "group": "574ae0b3482dc46e",
+        "order": 4,
+        "width": "12",
+        "height": "1",
+        "name": "rainchart label",
+        "label": "Thời gian mưa",
+        "format": "",
+        "layout": "row-center",
+        "className": "label_rainchart",
+        "style": true,
+        "font": "",
+        "fontSize": "19",
+        "color": "#000000",
+        "x": 2560,
+        "y": 1560,
+        "wires": []
+    },
+    {
+        "id": "7b83ad3d92adf979",
         "type": "debug",
         "z": "ca325aaf4a15f98c",
-        "name": "debug 24",
+        "name": "debug 23",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "rain",
+        "complete": "payload",
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 2240,
-        "y": 1560,
+        "x": 2540,
+        "y": 1600,
         "wires": []
     },
     {
