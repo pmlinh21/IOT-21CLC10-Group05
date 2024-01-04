@@ -27,8 +27,8 @@ int rain;                   // Đọc từ Rain Sensor - HIGH / LOW
 // Giá trị mặc định ban đầu
 bool isOpen;                // Mái che đang đóng
 bool isRaining;             // Trời không mưa     (rain = HIGH)
-bool isHot ;                 // Trời không nóng    (temperature > 35)
-bool isSafe ;                 // Mạch điện an toàn (humidity < 80)
+bool isHot ;                // Trời không nóng    (temperature > 35)
+bool isSafe ;               // Mạch điện an toàn (humidity < 80)
                    
 bool warning;
 int autoMode; // 1: Chế độ tự động "Bình thường", 2: Chế độ tự động "Phơi đồ", 3: Người dùng tự điều khiển
@@ -52,7 +52,7 @@ FirebaseAuth auth;
 FirebaseConfig config;
 
 // Wifi Cafe
-const char* ssid = "The Simple Cafe";
+const char* ssid = "The Simple Cafe FL1";
 const char* password = "simpleisthebest";
 
 // Wifi Lien
@@ -60,8 +60,8 @@ const char* password = "simpleisthebest";
 // const char* password = "ngoquocanh";
 
 // Wifi 3G
-// const char* ssid = "21127341";
-// const char* password = "hihihaha";
+// const char* ssid = "esp32";
+// const char* password = "mylinh123";
 
 // Wifi Thư viện
 // const char* ssid = "HCMUS Thu Vien";
@@ -78,12 +78,46 @@ PubSubClient client(espClient);
 
 void wifiConnect() {
   Serial.println("Connecting to WiFi");
+  WiFi.mode (WIFI_STA);
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
     Serial.print(".");
   }
-  Serial.println(" Connected!");
+  // Esp_wifi_set_ps(WIFI_PS_NONE);
+  // bool connect = false;
+  // int count = 0;
+  // while (!connect) {
+  //   if (count % 3 == 0) {
+  //     ssid = "The Simple Cafe";
+  //     password = "simpleisthebest"; 
+  //     Serial.println(ssid);
+  //   }
+  //   else if (count % 3 == 1) {
+  //     ssid = "esp32";
+  //     password = "mylinh123"; 
+  //     Serial.println(ssid);
+  //   }
+  //   else {
+  //     ssid = "Lien";
+  //     password = "iotnhom5";
+  //     Serial.println(ssid);
+  //   }
+  //   WiFi.begin(ssid, password);
+  //   int wait = 0;
+  //   while (WiFi.status() != WL_CONNECTED && wait < 30) {
+  //     delay(500);
+  //     Serial.print(".");
+  //     wait++;
+  //   }
+  //   if (WiFi.status() == WL_CONNECTED) {
+  //     connect = true;
+  //     Serial.println(" Connected!");
+  //   } 
+  //   else {
+  //     count = (count + 1) % 3;
+  //   }
+  // }
 }
 
 void mqttReconnect() {
@@ -94,8 +128,8 @@ void mqttReconnect() {
       client.subscribe("project/userChangeAutoMode");
       client.subscribe("project/userOpenAwning");
       client.subscribe("project/userChangeMode");
-      client.subscribe("project/userSetDefaultTemp");
-      client.subscribe("project/userSetDefaultHumid");
+      client.subscribe("project/userSetDefaultTemperature");
+      client.subscribe("project/userSetDefaultHumidity");
       client.subscribe("project/userSetDefaultSetting");
       client.subscribe("project/initializeValues");
       // subcribe other topics here
