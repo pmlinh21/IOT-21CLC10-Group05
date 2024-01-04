@@ -70,7 +70,7 @@ const char* password = "simpleisthebest";
 // const char* ssid = "Thuy Phan";
 // const char* password = "linhphan";
 
-const char*  mqttServer = "test.mosquitto.org";
+const char*  mqttServer = "broker.hivemq.com";
 int port = 1883;
 
 WiFiClient espClient;
@@ -91,17 +91,18 @@ void mqttReconnect() {
     Serial.print("Attempting MQTT connection...");
     if (client.connect("21127341")) {
       Serial.println(" connected");
-      // client.subscribe("project/userChangeAutoMode");
+      client.subscribe("project/userChangeAutoMode");
       client.subscribe("project/userOpenAwning");
-      // client.subscribe("project/userChangeMode");
-      // client.subscribe("project/userSetDefaultTemp");
-      // client.subscribe("project/userSetDefaultHumid");
-      // client.subscribe("project/userSetDefaultValues");
+      client.subscribe("project/userChangeMode");
+      client.subscribe("project/userSetDefaultTemp");
+      client.subscribe("project/userSetDefaultHumid");
+      client.subscribe("project/userSetDefaultSetting");
+      client.subscribe("project/initializeValues");
       // subcribe other topics here
 
     } else {
-      Serial.println(" try again in 2 seconds");
-      delay(2000);
+      Serial.println(" try again in 5 seconds");
+      delay(5000);
     }
   }
 }
@@ -112,65 +113,95 @@ void callback(char* topic, byte* message, unsigned int length) {
     stMessage += (char)message[i];
   }
   Serial.println(topic);
-  // if (strcmp(topic, "project/userChangeAutoMode") == 0) {
-    // if (stMessage == "1") {
-    //   Serial.println("Người dùng chuyển chế độ Bình thường");
-    // //   // autoMode = 1;
-    // }
-    // else if (stMessage == "2") {
-    //   Serial.println("Người dùng chuyển chế độ Phơi đồ");
-    // //   // autoMode = 2;
-    // }
-    // else {
-    //   Serial.println("Lỗi chuyển chế độ tự động");
-    // }
-    // Serial.println(stMessage);
-  // } else 
-  if (strcmp(topic, "project/userOpenAwning") == 0) {
+  
+  if (strcmp(topic, "project/initializeValues") == 0) {
+    int pos = stMessage.indexOf(";");
+    defaultTemperature = stMessage.substring(0, pos).toInt();
+    stMessage = stMessage.substring(pos + 1);
+    Serial.println(defaultTemperature);
+
+    pos = stMessage.indexOf(";");
+    defaultHumidity = stMessage.substring(0, pos).toInt();
+    stMessage = stMessage.substring(pos + 1);
+    Serial.println(defaultHumidity);
+
+    pos = stMessage.indexOf(";");
+    autoMode = stMessage.substring(0, pos).toInt();
+    stMessage = stMessage.substring(pos + 1);
+    Serial.println(autoMode);
+
+    pos = stMessage.indexOf(";");
+    isOpen = stMessage.substring(0, pos) == "true";
+    stMessage = stMessage.substring(pos + 1);
+    Serial.println(isOpen);
+
+    pos = stMessage.indexOf(";");
+    isAuto = stMessage.substring(0, pos) == "true";
+    Serial.println(isAuto);
+  }
+  else if (strcmp(topic, "project/userChangeAutoMode") == 0) {
+    if (stMessage == "1") {
+      Serial.println("Người dùng chuyển chế độ Bình thường");
+      autoMode = 1;
+    }
+    else if (stMessage == "2") {
+      Serial.println("Người dùng chuyển chế độ Phơi đồ");
+      autoMode = 2;
+    }
+    else {
+      Serial.println("Lỗi chuyển chế độ tự động");
+    }
+    Serial.println(stMessage);
+  } else if (strcmp(topic, "project/userOpenAwning") == 0) {
     if (stMessage == "true") {
       Serial.println("Người dùng mở mái che");
       openMaiche();
-      // isOpen = true;
+      isOpen = true;
     }
     else if (stMessage == "false") {
       Serial.println("Người dùng đóng mái che");
       closeMaiche();
-      // isOpen = false;
+      isOpen = false;
+    }
+    else if (stMessage == "inittrue") {
+      isOpen = true;
+    }
+    else if (stMessage == "initfalse") {
+      isOpen = false;
     }
     else {
       Serial.println("Lỗi đóng mở mái che");
     }
     Serial.println(stMessage);
-  } 
-
-  // else if (strcmp(topic, "project/userChangeMode") == 0) {
-  //   if (stMessage == "auto") {
-  //     Serial.println("Người dùng chuyển chế độ Tự động");
-  //     // isAuto = true;
-  //   }
-  //   else if (stMessage == "manual") {
-  //     Serial.println("Người dùng chuyển chế độ Thủ công");
-  //     // isAuto = false;
-  //   }
-  //   else {
-  //     Serial.println("Lỗi chuyển chế độ");
-  //   }
-  //   Serial.println(stMessage);
-  // } else if (strcmp(topic, "project/userSetDefaultTemp") == 0) {
-  //   Serial.println("Người dùng chỉnh nhiệt độ mặc định");
-  // //   defaultTemperature = stMessage.toInt();
-  // //   Serial.println(defaultTemperature);
-  // } else if (strcmp(topic, "project/userSetDefaultHumid") == 0) {
-  //   Serial.println("Người dùng chỉnh độ ẩm mặc định");
-  // //   defaultHumidity = stMessage.toInt();
-  // //   Serial.println(defaultHumidity);
-  // } else if (strcmp(topic, "project/userSetDefaultValues") == 0) {
-  //   Serial.println("Người dùng chỉnh về thông số mặc định");
-  // //   defaultTemperature = 35;
-  // //   defaultHumidity = 80;
-  // } else {
-  //   Serial.println("error2");
-  // }
+  } else if (strcmp(topic, "project/userChangeMode") == 0) {
+    if (stMessage == "true") {
+      Serial.println("Người dùng chuyển chế độ Tự động");
+      isAuto = true;
+    }
+    else if (stMessage == "false") {
+      Serial.println("Người dùng chuyển chế độ Thủ công");
+      isAuto = false;
+    }
+    else {
+      Serial.println("Lỗi chuyển chế độ");
+    }
+    Serial.println(stMessage);
+  } else if (strcmp(topic, "project/userSetDefaultTemperature") == 0) {
+    Serial.println("Người dùng chỉnh nhiệt độ mặc định");
+    defaultTemperature = stMessage.toInt();
+    Serial.println(stMessage);
+  } else if (strcmp(topic, "project/userSetDefaultHumidity") == 0) {
+    Serial.println("Người dùng chỉnh độ ẩm mặc định");
+    defaultHumidity = stMessage.toInt();
+    Serial.println(stMessage);
+  } else if (strcmp(topic, "project/userSetDefaultSetting") == 0) {
+    Serial.println("Người dùng chỉnh về thông số mặc định");
+    defaultTemperature = 35;
+    defaultHumidity = 80;
+    Serial.println(stMessage);
+  } else {
+    Serial.println("Lỗi");
+  }
 }
 
 void firebaseConnect() {
@@ -226,25 +257,6 @@ void setup(){
   client.setCallback(callback);
 
   firebaseConnect();
-
-  // get setting from firebase
-  while (!Firebase.ready()) {
-    Serial.println("Waiting for firebase...");
-  };
-  if (Firebase.ready()) {
-    Serial.println("Get data from firebase\n");
-    Firebase.getInt(fbdo, F("/setting/autoMode"));
-    autoMode = fbdo.to<int>();
-    Firebase.getBool(fbdo, FPSTR("/setting/isAuto"));
-    isAuto = fbdo.to<bool>();
-    Firebase.getBool(fbdo, FPSTR("/setting/isOpen"));
-    isOpen = fbdo.to<bool>();
-
-    Firebase.getInt(fbdo, F("/setting/defaultTemperature"));
-    defaultTemperature = fbdo.to<float>();
-    Firebase.getInt(fbdo, F("/setting/defaultHumidity"));
-    defaultHumidity = fbdo.to<float>();
-  };
 }
 
 void closeMaiche(){
@@ -268,36 +280,34 @@ void loop(){
   }
   client.loop();
 
-  while (!Firebase.ready()) {
-    Serial.println("Waiting for firebase...");
-  };
+  // while (!Firebase.ready()) {
+  //   Serial.println("Waiting for firebase...");
+  // };
 
-  if (Firebase.ready()){
-    while (!Firebase.getInt(fbdo, F("/setting/autoMode"))){}
-    autoMode = fbdo.to<int>();
+  // if (Firebase.ready()){
+  //   Firebase.getInt(fbdo, F("/setting/autoMode"));
+  //   autoMode = fbdo.to<int>();
 
-    while (!Firebase.getBool(fbdo, FPSTR("/setting/isAuto"))){}
-    isAuto = fbdo.to<bool>();
+  //   Firebase.getBool(fbdo, FPSTR("/setting/isAuto"));
+  //   isAuto = fbdo.to<bool>();
 
-    while (!Firebase.getBool(fbdo, FPSTR("/setting/isOpen"))){}
-    isOpen = fbdo.to<bool>();
+  //   Firebase.getBool(fbdo, FPSTR("/setting/isOpen"));
+  //   isOpen = fbdo.to<bool>();
 
-    while (!Firebase.getInt(fbdo, F("/setting/defaultTemperature"))){}
-    defaultTemperature = fbdo.to<int>();
+  //   Firebase.getInt(fbdo, F("/setting/defaultTemperature"));
+  //   defaultTemperature = fbdo.to<int>();
 
-    while (!Firebase.getInt(fbdo, F("/setting/humidityDefault"))){}
-    defaultHumidity = fbdo.to<int>();
+  //   Firebase.getInt(fbdo, F("/setting/humidityDefault"));
+  //   defaultHumidity = fbdo.to<int>();
     
-    Serial.println("Get from firebase: " + String(defaultTemperature) + " " + String(defaultHumidity) + " " +  String(isAuto) + " " + String(autoMode) + " " + String(isOpen));
-    // delay(100);
-    
-  }
+  //   Serial.println("Get from firebase: " + String(defaultTemperature) + " " + String(defaultHumidity) + " " +  String(isAuto) + " " + String(autoMode) + " " + String(isOpen));
+  //   // delay(100);
+  // }
 
   // read input
   temperature = dht.readTemperature();
   humidity = dht.readHumidity();
   rain = digitalRead(23);
-
   isRaining = (rain == LOW);
 
   // Message publish to MQTT
@@ -315,18 +325,22 @@ void loop(){
     sprintf(buffer, "{\"temperature\":%.1f, \"humidity\":%.0f, \"isRaining\":%s, \"isAuto\":%s, \"autoMode\":%d}", temperature, humidity, isRaining ? "true" : "false", isAuto ? "true" : "false", autoMode);
   }
   // Serial.println(buffer);
+  client.publish("project/data", buffer);
+
+  Serial.println(String(isAuto) + " " + String(autoMode) + " " + String(isHot) + " " + String(isRaining) + " " + String(isOpen) 
+  + " " + String(defaultHumidity) + " " + String(defaultTemperature));
 
   if (isAuto) {
     if (autoMode == 1) {
       if ((isHot && !isOpen)||(isRaining && !isOpen)){
         openMaiche();
         Firebase.setBool(fbdo, F("/setting/isOpen"), true);
-        // isOpen=true;
+        isOpen=true;
       }
       else if (!isHot && isOpen && !isRaining){
         closeMaiche();
         Firebase.setBool(fbdo, F("/setting/isOpen"), false);
-        // isOpen=false;
+        isOpen=false;
       }
     }
     else if (autoMode == 2) {
@@ -334,12 +348,12 @@ void loop(){
       if(isRaining && !isOpen){
         openMaiche();
         Firebase.setBool(fbdo, F("/setting/isOpen"), true);
-        // isOpen=true;
+        isOpen=true;
       }
       else if (!isRaining && isOpen){
         closeMaiche();
         Firebase.setBool(fbdo, F("/setting/isOpen"), false);
-        // isOpen=false;
+        isOpen=false;
       }
     }
   }
@@ -352,7 +366,5 @@ void loop(){
     warning = true;
   }
 
-  client.publish("project/data", buffer);
-
-  delay(500);
+  delay(200);
 }
