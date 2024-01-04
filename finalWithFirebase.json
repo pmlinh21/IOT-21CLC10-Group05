@@ -45,7 +45,7 @@
         "splitLayout": false,
         "className": "loginform",
         "x": 530,
-        "y": 840,
+        "y": 640,
         "wires": [
             [
                 "d1a70ed9772460b3"
@@ -74,7 +74,7 @@
         "topic": "topic",
         "topicType": "msg",
         "x": 310,
-        "y": 1620,
+        "y": 1780,
         "wires": [
             [
                 "ef4f99fb99adfc56"
@@ -89,7 +89,7 @@
         "name": "",
         "events": "change",
         "x": 760,
-        "y": 1620,
+        "y": 1780,
         "wires": [
             []
         ]
@@ -108,7 +108,7 @@
         "finalize": "",
         "libs": [],
         "x": 500,
-        "y": 1620,
+        "y": 1780,
         "wires": [
             [
                 "d81fdc13647a295a"
@@ -119,16 +119,16 @@
         "id": "050e41da6926c88a",
         "type": "function",
         "z": "ca325aaf4a15f98c",
-        "name": "changeUI",
-        "func": "msg.payload = {\n    group: {\n        show: [\"Welcome_Login\"],\n        hide: [\"Welcome_Signup\"],\n    },\n    tabs:{\n        hide: [\"Welcome\", \"Dashboard\"]\n    },\n    tab: \"Welcome\"\n}\nreturn msg;",
+        "name": "show Welcome page",
+        "func": "msg.payload = {\n    tabs:{\n        hide: [\"Welcome\", \"Dashboard\"]\n    },\n    tab: \"Welcome\"\n}\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 800,
-        "y": 720,
+        "x": 840,
+        "y": 1140,
         "wires": [
             [
                 "2102af00efe91d1d"
@@ -139,10 +139,10 @@
         "id": "2102af00efe91d1d",
         "type": "ui_ui_control",
         "z": "ca325aaf4a15f98c",
-        "name": "",
+        "name": "show Welcome page",
         "events": "change",
-        "x": 1100,
-        "y": 720,
+        "x": 1140,
+        "y": 1140,
         "wires": [
             []
         ]
@@ -186,7 +186,7 @@
         "splitLayout": "",
         "className": "signupform",
         "x": 290,
-        "y": 1500,
+        "y": 1660,
         "wires": [
             [
                 "94f185760e32ee1f"
@@ -197,7 +197,7 @@
         "id": "9446d79b6bae6eae",
         "type": "switch",
         "z": "ca325aaf4a15f98c",
-        "name": "loginCheck",
+        "name": "loginSwitch",
         "property": "email",
         "propertyType": "msg",
         "rules": [
@@ -212,7 +212,7 @@
         "repair": true,
         "outputs": 2,
         "x": 1110,
-        "y": 840,
+        "y": 640,
         "wires": [
             [
                 "ec8208edf089f6c6"
@@ -234,14 +234,14 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1370,
-        "y": 840,
+        "x": 1410,
+        "y": 320,
         "wires": [
             [
                 "f3ccdf3d76c50954",
-                "d88638c4c0d16462",
+                "8ba91e07425409a1",
                 "6df6da944e478839",
-                "8ba91e07425409a1"
+                "d88638c4c0d16462"
             ]
         ]
     },
@@ -258,7 +258,7 @@
         "finalize": "",
         "libs": [],
         "x": 1370,
-        "y": 720,
+        "y": 700,
         "wires": [
             [
                 "730babd706f89434"
@@ -279,7 +279,7 @@
         "finalize": "",
         "libs": [],
         "x": 790,
-        "y": 1500,
+        "y": 1660,
         "wires": [
             [
                 "02ada87a7208c5b0",
@@ -307,7 +307,7 @@
         "repair": true,
         "outputs": 2,
         "x": 1130,
-        "y": 1500,
+        "y": 1660,
         "wires": [
             [],
             [
@@ -332,7 +332,7 @@
         "topic": "",
         "name": "unsuccessful msg",
         "x": 1390,
-        "y": 1400,
+        "y": 1600,
         "wires": [
             []
         ]
@@ -351,7 +351,7 @@
         "finalize": "",
         "libs": [],
         "x": 1350,
-        "y": 1460,
+        "y": 1660,
         "wires": [
             [
                 "d4b2de698982cee8"
@@ -380,7 +380,7 @@
         "topic": "topic",
         "topicType": "msg",
         "x": 290,
-        "y": 1560,
+        "y": 1720,
         "wires": [
             [
                 "051a3ae234453051"
@@ -395,7 +395,7 @@
         "name": "",
         "events": "change",
         "x": 760,
-        "y": 1560,
+        "y": 1720,
         "wires": [
             []
         ]
@@ -414,7 +414,7 @@
         "finalize": "",
         "libs": [],
         "x": 500,
-        "y": 1560,
+        "y": 1720,
         "wires": [
             [
                 "f831bbf9c71cf6b8"
@@ -439,29 +439,8 @@
         "fontSize": "30",
         "color": "#0094ce",
         "x": 540,
-        "y": 920,
+        "y": 580,
         "wires": []
-    },
-    {
-        "id": "3e85af4ee8938708",
-        "type": "ui_template",
-        "z": "ca325aaf4a15f98c",
-        "group": "40f9b51bc8382105",
-        "name": "",
-        "order": 1,
-        "width": 0,
-        "height": 0,
-        "format": "<style>\n#Welcome_Login,\n#Welcome_Signup{\n    margin-top: 6rem !important;\n}\n\n.welcome-text{\n    font-weight: 650;\n}\n\n.loginform, .signupform{\n    margin: 0.5rem auto !important;\n    max-width: 25rem;\n    position: absolute !important;\n    top: 20% !important;\n    left: 33.5% !important;\n    /* margin-top: 0.5rem !important; */\n}\n\n.loginform [type=submit],\n.signupform [type=submit]{\n    max-width: 10rem;\n    max-height: 3rem;\n    line-height: 3rem !important;\n}\n\n.createacc-button{\n    max-width: 10rem;\n    max-height: 3rem;\n    position: absolute !important;\n    top: 75% !important;\n    left: 43% !important;\n}\n\n.back-button{\n    max-width: 10rem;\n    max-height: 3rem;\n    position: absolute !important;\n    top: 75% !important;\n    left: 43% !important;\n}\n\n.logout-button{\n    max-width: 8rem !important;\n    max-height: 3rem;\n    line-height: 3rem !important;\n    position: absolute !important;\n    top: 2rem !important;\n    left: 68rem !important;\n}\n\n.humidchart{\n    margin-left: 6rem !important;\n}\n\n.humidchart,\n.tempchart{\n    margin-top: 6rem !important;\n}\n\n.nr-dashboard-ui_statetrail{\n    top: 40rem !important;\n}\n\n.label_rainchart{\n    top: 40rem !important;\n    font-weight: 500;\n    height: 3rem !important;\n}\n\n#Dashboard_Account_cards{\n     margin-top: 0rem !important;\n     margin-bottom: 0rem !important;\n}\n\n</style>",
-        "storeOutMessages": true,
-        "fwdInMessages": true,
-        "resendOnRefresh": true,
-        "templateScope": "global",
-        "className": "",
-        "x": 1380,
-        "y": 780,
-        "wires": [
-            []
-        ]
     },
     {
         "id": "730babd706f89434",
@@ -479,7 +458,7 @@
         "topic": "",
         "name": "unsuccessful msg",
         "x": 1410,
-        "y": 640,
+        "y": 760,
         "wires": [
             []
         ]
@@ -492,7 +471,7 @@
         "order": 1,
         "width": "0",
         "height": "0",
-        "name": "",
+        "name": "Chào mừng text",
         "label": "Chào mừng ",
         "format": "{{msg.email}}",
         "layout": "row-left",
@@ -501,18 +480,18 @@
         "font": "",
         "fontSize": "20",
         "color": "#0094ce",
-        "x": 1730,
-        "y": 440,
+        "x": 1740,
+        "y": 300,
         "wires": []
     },
     {
         "id": "6eab9ed51facaa15",
         "type": "ui_ui_control",
         "z": "ca325aaf4a15f98c",
-        "name": "",
+        "name": "show Dashboard",
         "events": "change",
-        "x": 1940,
-        "y": 340,
+        "x": 1970,
+        "y": 240,
         "wires": [
             []
         ]
@@ -521,16 +500,16 @@
         "id": "f3ccdf3d76c50954",
         "type": "function",
         "z": "ca325aaf4a15f98c",
-        "name": "changeUI",
-        "func": "msg.payload = {\n    tab: \"Dashboard\",\n    group: {\n        show: [\"Dashboard_Account\"]\n    }, \n    tabs:{\n        hide: [\"Welcome\", \"Dashboard\"]\n    }\n}\nreturn msg;",
+        "name": "show Dashboard",
+        "func": "msg.payload = {\n    tab: \"Dashboard\", \n    tabs:{\n        hide: [\"Welcome\", \"Dashboard\"]\n    }\n}\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1720,
-        "y": 340,
+        "x": 1750,
+        "y": 240,
         "wires": [
             [
                 "6eab9ed51facaa15"
@@ -576,7 +555,7 @@
         "useDifferentColor": false,
         "className": "tempchart",
         "x": 2550,
-        "y": 1440,
+        "y": 1100,
         "wires": [
             []
         ]
@@ -594,7 +573,7 @@
         "finalize": "",
         "libs": [],
         "x": 2280,
-        "y": 1440,
+        "y": 1100,
         "wires": [
             [
                 "f987111b64020e71"
@@ -622,7 +601,7 @@
         "topic": "topic",
         "topicType": "msg",
         "x": 1730,
-        "y": 500,
+        "y": 360,
         "wires": [
             [
                 "91efae4305375d70"
@@ -648,7 +627,7 @@
         "fontSize": "30",
         "color": "#0094ce",
         "x": 300,
-        "y": 1740,
+        "y": 1900,
         "wires": []
     },
     {
@@ -664,7 +643,7 @@
         "pathType": "str",
         "useConstraint": false,
         "x": 520,
-        "y": 780,
+        "y": 1200,
         "wires": [
             [
                 "95f7a7897932930b"
@@ -675,8 +654,8 @@
         "id": "95f7a7897932930b",
         "type": "function",
         "z": "ca325aaf4a15f98c",
-        "name": "return msg.user",
-        "func": "msg.user = []\n\nfor (let key in msg.payload) {\n  if (msg.payload.hasOwnProperty(key)) {\n    msg.user.push({\n        email: msg.payload[key].email,\n        pwd: msg.payload[key].pwd})\n    }\n}\n\nreturn msg;",
+        "name": "set global.user",
+        "func": "msg.user = []\n\nfor (let key in msg.payload) {\n  if (msg.payload.hasOwnProperty(key)) {\n    msg.user.push({\n        email: msg.payload[key].email,\n        pwd: msg.payload[key].pwd})\n    }\n}\n\nglobal.set(\"user\", msg.user);\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -684,27 +663,25 @@
         "finalize": "",
         "libs": [],
         "x": 820,
-        "y": 780,
+        "y": 1200,
         "wires": [
-            [
-                "a6d5f7a9c6e85614"
-            ]
+            []
         ]
     },
     {
         "id": "d1a70ed9772460b3",
         "type": "function",
         "z": "ca325aaf4a15f98c",
-        "name": "return msg.loginInfo",
-        "func": "msg.loginInfo = msg.payload\n\nconst user = global.get(\"user\");\n\nfor (let i = 0; i < user.length; i++) {\n    if (JSON.stringify(user[i]) === JSON.stringify(msg.loginInfo))\n      return {email: user[i].email}\n  }\n  return {email: null};\n",
+        "name": "loginCheck",
+        "func": "const loginInfo = msg.payload\n\nconst user = global.get(\"user\");\n\nfor (let i = 0; i < user.length; i++) {\n    if (JSON.stringify(user[i]) === JSON.stringify(loginInfo))\n      return {email: user[i].email}\n  }\n  return {email: null};\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 840,
-        "y": 840,
+        "x": 810,
+        "y": 640,
         "wires": [
             [
                 "9446d79b6bae6eae"
@@ -723,7 +700,7 @@
         "priority": 1,
         "queryType": "push",
         "x": 1130,
-        "y": 1560,
+        "y": 1720,
         "wires": []
     },
     {
@@ -741,8 +718,8 @@
         "resendOnRefresh": true,
         "templateScope": "local",
         "className": "",
-        "x": 3120,
-        "y": 1720,
+        "x": 2900,
+        "y": 1480,
         "wires": [
             []
         ]
@@ -762,8 +739,8 @@
         "resendOnRefresh": true,
         "templateScope": "local",
         "className": "",
-        "x": 3110,
-        "y": 1760,
+        "x": 2890,
+        "y": 1520,
         "wires": [
             []
         ]
@@ -783,8 +760,8 @@
         "resendOnRefresh": true,
         "templateScope": "local",
         "className": "",
-        "x": 3120,
-        "y": 1860,
+        "x": 2900,
+        "y": 1620,
         "wires": [
             []
         ]
@@ -809,8 +786,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 2570,
-        "y": 1860,
+        "x": 2350,
+        "y": 1620,
         "wires": [
             [
                 "15047a37f9b31452"
@@ -831,8 +808,8 @@
         "syntax": "mustache",
         "template": "{\"icon\":\"bi-cloud-sun\", \"color\":\"gold\", \"text\":\"Không mưa\"}",
         "output": "json",
-        "x": 2830,
-        "y": 1880,
+        "x": 2610,
+        "y": 1640,
         "wires": [
             [
                 "6fd7e7c32f7ba99f"
@@ -850,8 +827,8 @@
         "syntax": "mustache",
         "template": "{\"icon\":\"bi-cloud-rain\", \"color\":\"cornflowerblue\", \"text\":\"Mưa\"}",
         "output": "json",
-        "x": 2830,
-        "y": 1840,
+        "x": 2610,
+        "y": 1600,
         "wires": [
             [
                 "6fd7e7c32f7ba99f"
@@ -889,10 +866,9 @@
         "topicType": "msg",
         "className": "automode",
         "x": 3150,
-        "y": 1100,
+        "y": 820,
         "wires": [
             [
-                "69e852999f3fb745",
                 "d089f34f6f5059f8"
             ]
         ]
@@ -906,14 +882,14 @@
         "order": 1,
         "width": 0,
         "height": 0,
-        "format": "<style>\n    .automode {\n        font-size: 24px;\n        color: grey;\n        /* display: none; */\n    }\n    .default-temperature, .default-humidity {\n        font-size: 20px;\n    }\n    .default-temperature .value, .default-humidity .value {\n        font-size: 32px;\n    }\n    \n    .reset-button > button > span {\n        font-size: 20px;\n    }\n\n    .mode-toggle {\n        font-size: 25px;\n    }\n</style>",
+        "format": "<style>\n    .automode {\n        font-size: 24px;\n        color: grey;\n        /* display: none; */\n    }\n    .default-temperature, .default-humidity {\n        font-size: 20px;\n    }\n    .default-temperature .value, .default-humidity .value {\n        font-size: 32px;\n    }\n    \n    .reset-button > button > span {\n        font-size: 20px;\n    }\n\n    .mode-toggle {\n        font-size: 25px;\n    }\n\n    #Welcome_Login,\n#Welcome_Signup{\n    margin-top: 6rem !important;\n}\n\n.welcome-text{\n    font-weight: 650;\n}\n\n.loginform, .signupform{\n    margin: 0.5rem auto !important;\n    max-width: 25rem;\n    position: absolute !important;\n    top: 20% !important;\n    left: 33.5% !important;\n    /* margin-top: 0.5rem !important; */\n}\n\n.loginform [type=submit],\n.signupform [type=submit]{\n    max-width: 10rem;\n    max-height: 3rem;\n    line-height: 3rem !important;\n}\n\n.createacc-button{\n    max-width: 10rem;\n    max-height: 3rem;\n    position: absolute !important;\n    top: 75% !important;\n    left: 43% !important;\n}\n\n.back-button{\n    max-width: 10rem;\n    max-height: 3rem;\n    position: absolute !important;\n    top: 75% !important;\n    left: 43% !important;\n}\n\n.logout-button{\n    max-width: 8rem !important;\n    max-height: 3rem;\n    line-height: 3rem !important;\n    position: absolute !important;\n    top: 2rem !important;\n    left: 68rem !important;\n}\n\n.humidchart{\n    margin-left: 6rem !important;\n}\n\n.humidchart,\n.tempchart{\n    margin-top: 6rem !important;\n}\n\n.nr-dashboard-ui_statetrail{\n    top: 40rem !important;\n}\n\n.label_rainchart{\n    top: 40rem !important;\n    font-weight: 500;\n    height: 3rem !important;\n}\n\n#Dashboard_Account_cards{\n     margin-top: 0rem !important;\n     margin-bottom: 0rem !important;\n}\n</style>",
         "storeOutMessages": true,
         "fwdInMessages": true,
         "resendOnRefresh": true,
         "templateScope": "global",
         "className": "",
-        "x": 1380,
-        "y": 900,
+        "x": 520,
+        "y": 1340,
         "wires": [
             []
         ]
@@ -945,10 +921,9 @@
         "animate": false,
         "className": "mode-toggle",
         "x": 3150,
-        "y": 1240,
+        "y": 960,
         "wires": [
             [
-                "4eb8aae9ca78664e",
                 "6a1a99a045aced83"
             ]
         ]
@@ -965,7 +940,7 @@
         "template": "{{payload.humidityDefault}}",
         "output": "str",
         "x": 1970,
-        "y": 740,
+        "y": 600,
         "wires": [
             [
                 "fa44addc6191cbf7"
@@ -991,7 +966,7 @@
         "repair": false,
         "outputs": 2,
         "x": 1950,
-        "y": 1020,
+        "y": 900,
         "wires": [
             [
                 "db3d91a128f461f8"
@@ -1013,7 +988,7 @@
         "template": "{{payload.autoMode}}",
         "output": "json",
         "x": 2560,
-        "y": 1100,
+        "y": 820,
         "wires": [
             [
                 "4417778ad4dd7d5e"
@@ -1032,7 +1007,7 @@
         "template": "{\"isAuto\":{{payload.isAuto}}, \"autoMode\":{{payload.autoMode}}, \"text\":\"TỰ ĐỘNG\", \"switchText\":\"Bật\", \"isOpen\":{{payload.isOpen}}}",
         "output": "json",
         "x": 2270,
-        "y": 1020,
+        "y": 740,
         "wires": [
             [
                 "431683ab16b09557",
@@ -1056,7 +1031,7 @@
         "template": "{\"isAuto\":{{payload.isAuto}}, \"autoMode\":{{payload.autoMode}}, \"text\":\"THỦ CÔNG\", \"switchText\":\"Tắt\", \"isOpen\":{{payload.isOpen}}}",
         "output": "json",
         "x": 2270,
-        "y": 1340,
+        "y": 1020,
         "wires": [
             [
                 "431683ab16b09557",
@@ -1084,7 +1059,7 @@
         "templateScope": "local",
         "className": "",
         "x": 2540,
-        "y": 1200,
+        "y": 920,
         "wires": [
             []
         ]
@@ -1101,7 +1076,7 @@
         "template": "{{payload.isAuto}}",
         "output": "json",
         "x": 2560,
-        "y": 1240,
+        "y": 960,
         "wires": [
             [
                 "775cc2f4de6bc85a"
@@ -1120,31 +1095,12 @@
         "template": "{{payload.isOpen}}",
         "output": "json",
         "x": 2570,
-        "y": 1140,
+        "y": 860,
         "wires": [
             [
                 "5d365ed65a4b27c0"
             ]
         ]
-    },
-    {
-        "id": "69e852999f3fb745",
-        "type": "mqtt out",
-        "z": "ca325aaf4a15f98c",
-        "d": true,
-        "name": "",
-        "topic": "project/userChangeAutoMode",
-        "qos": "",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "e603fe28287a3728",
-        "x": 3490,
-        "y": 1100,
-        "wires": []
     },
     {
         "id": "5d365ed65a4b27c0",
@@ -1177,7 +1133,7 @@
         "topicType": "msg",
         "className": "automode",
         "x": 3140,
-        "y": 1140,
+        "y": 860,
         "wires": [
             [
                 "6d2b9a6f189f0abe",
@@ -1205,7 +1161,7 @@
         "to": "",
         "reg": false,
         "x": 2860,
-        "y": 1000,
+        "y": 720,
         "wires": [
             [
                 "4417778ad4dd7d5e"
@@ -1232,7 +1188,7 @@
         "to": "",
         "reg": false,
         "x": 2860,
-        "y": 1040,
+        "y": 760,
         "wires": [
             [
                 "5d365ed65a4b27c0"
@@ -1259,7 +1215,7 @@
         "to": "",
         "reg": false,
         "x": 2860,
-        "y": 1320,
+        "y": 1000,
         "wires": [
             [
                 "4417778ad4dd7d5e"
@@ -1286,7 +1242,7 @@
         "to": "",
         "reg": false,
         "x": 2860,
-        "y": 1360,
+        "y": 1040,
         "wires": [
             [
                 "5d365ed65a4b27c0"
@@ -1306,8 +1262,8 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 1950,
-        "y": 1740,
+        "x": 1730,
+        "y": 1500,
         "wires": [
             [
                 "d56c82d4995d5019"
@@ -1322,8 +1278,8 @@
         "property": "payload",
         "action": "obj",
         "pretty": false,
-        "x": 2230,
-        "y": 1740,
+        "x": 2010,
+        "y": 1500,
         "wires": [
             [
                 "7511669780ad8e74",
@@ -1350,8 +1306,8 @@
         "drop": true,
         "allowrate": false,
         "outputs": 1,
-        "x": 2560,
-        "y": 1660,
+        "x": 2340,
+        "y": 1420,
         "wires": [
             [
                 "d2ac02c3b0d66894"
@@ -1371,11 +1327,10 @@
         "pathType": "str",
         "useConstraint": false,
         "x": 1720,
-        "y": 1440,
+        "y": 1160,
         "wires": [
             [
-                "6f12e91f7d401504",
-                "fc6afa1d2c77f9a3"
+                "6f12e91f7d401504"
             ]
         ]
     },
@@ -1392,7 +1347,7 @@
         "finalize": "",
         "libs": [],
         "x": 1950,
-        "y": 1440,
+        "y": 1160,
         "wires": [
             [
                 "38fba2a93c25c290",
@@ -1440,7 +1395,7 @@
         "useDifferentColor": false,
         "className": "humidchart",
         "x": 2550,
-        "y": 1480,
+        "y": 1160,
         "wires": [
             []
         ]
@@ -1458,7 +1413,7 @@
         "finalize": "",
         "libs": [],
         "x": 2270,
-        "y": 1480,
+        "y": 1160,
         "wires": [
             [
                 "bc34edc397ae8921"
@@ -1478,12 +1433,11 @@
         "finalize": "",
         "libs": [],
         "x": 2260,
-        "y": 1520,
+        "y": 1220,
         "wires": [
             [
                 "729ccaf1a376cced",
-                "c9099a93ce6dee0d",
-                "7b83ad3d92adf979"
+                "c9099a93ce6dee0d"
             ]
         ]
     },
@@ -1497,8 +1451,8 @@
         "pathType": "str",
         "priority": 1,
         "queryType": "push",
-        "x": 3130,
-        "y": 1660,
+        "x": 2910,
+        "y": 1420,
         "wires": []
     },
     {
@@ -1513,8 +1467,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2880,
-        "y": 1660,
+        "x": 2660,
+        "y": 1420,
         "wires": [
             [
                 "76b5ac208512258e"
@@ -1533,7 +1487,7 @@
         "template": "{{payload.defaultTemperature}}",
         "output": "str",
         "x": 1990,
-        "y": 640,
+        "y": 540,
         "wires": [
             [
                 "5b5d4b6cbd2a2724"
@@ -1561,10 +1515,9 @@
         "step": 1,
         "className": "default-temperature",
         "x": 2280,
-        "y": 640,
+        "y": 540,
         "wires": [
             [
-                "1dadd951ce024257",
                 "bda1a9823553518a"
             ]
         ]
@@ -1590,10 +1543,9 @@
         "step": 1,
         "className": "default-humidity",
         "x": 2270,
-        "y": 740,
+        "y": 600,
         "wires": [
             [
-                "66e950fd468239fc",
                 "0ba0a87aecab49c9"
             ]
         ]
@@ -1619,70 +1571,12 @@
         "topic": "topic",
         "topicType": "msg",
         "x": 2290,
-        "y": 840,
+        "y": 660,
         "wires": [
             [
-                "9e8bc3506e2117a7",
                 "80e14983d7f08299"
             ]
         ]
-    },
-    {
-        "id": "9e8bc3506e2117a7",
-        "type": "mqtt out",
-        "z": "ca325aaf4a15f98c",
-        "d": true,
-        "name": "",
-        "topic": "project/userSetDefaultValues",
-        "qos": "",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "e603fe28287a3728",
-        "x": 2600,
-        "y": 840,
-        "wires": []
-    },
-    {
-        "id": "66e950fd468239fc",
-        "type": "mqtt out",
-        "z": "ca325aaf4a15f98c",
-        "d": true,
-        "name": "",
-        "topic": "project/userSetDefaultHumid",
-        "qos": "",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "e603fe28287a3728",
-        "x": 2600,
-        "y": 740,
-        "wires": []
-    },
-    {
-        "id": "1dadd951ce024257",
-        "type": "mqtt out",
-        "z": "ca325aaf4a15f98c",
-        "d": true,
-        "name": "",
-        "topic": "project/userSetDefaultTemp",
-        "qos": "",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "e603fe28287a3728",
-        "x": 2600,
-        "y": 640,
-        "wires": []
     },
     {
         "id": "8ba91e07425409a1",
@@ -1697,7 +1591,7 @@
         "pathType": "str",
         "useConstraint": false,
         "x": 1730,
-        "y": 640,
+        "y": 540,
         "wires": [
             [
                 "6ec1432142552ecf",
@@ -1718,7 +1612,7 @@
         "priority": 1,
         "queryType": "update",
         "x": 2860,
-        "y": 680,
+        "y": 540,
         "wires": []
     },
     {
@@ -1734,7 +1628,7 @@
         "finalize": "",
         "libs": [],
         "x": 2560,
-        "y": 680,
+        "y": 540,
         "wires": [
             [
                 "dcd4eb89066d359a"
@@ -1754,7 +1648,7 @@
         "finalize": "",
         "libs": [],
         "x": 2560,
-        "y": 780,
+        "y": 600,
         "wires": [
             [
                 "9929e975cc2b2e1f"
@@ -1772,7 +1666,7 @@
         "priority": 1,
         "queryType": "update",
         "x": 2860,
-        "y": 780,
+        "y": 600,
         "wires": []
     },
     {
@@ -1786,7 +1680,7 @@
         "priority": 1,
         "queryType": "update",
         "x": 2860,
-        "y": 880,
+        "y": 660,
         "wires": []
     },
     {
@@ -1802,7 +1696,7 @@
         "finalize": "",
         "libs": [],
         "x": 2560,
-        "y": 880,
+        "y": 660,
         "wires": [
             [
                 "0ce412d03e97bce7"
@@ -1822,31 +1716,12 @@
         "finalize": "",
         "libs": [],
         "x": 3440,
-        "y": 1060,
+        "y": 780,
         "wires": [
             [
                 "3a93b023bdac9e0b"
             ]
         ]
-    },
-    {
-        "id": "4eb8aae9ca78664e",
-        "type": "mqtt out",
-        "z": "ca325aaf4a15f98c",
-        "d": true,
-        "name": "",
-        "topic": "project/userChangeMode",
-        "qos": "",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "18af26a4e9951e61",
-        "x": 3470,
-        "y": 1240,
-        "wires": []
     },
     {
         "id": "6d2b9a6f189f0abe",
@@ -1863,14 +1738,14 @@
         "expiry": "",
         "broker": "18af26a4e9951e61",
         "x": 3470,
-        "y": 1140,
+        "y": 900,
         "wires": []
     },
     {
         "id": "b7ef19597d34a7b2",
         "type": "inject",
         "z": "ca325aaf4a15f98c",
-        "name": "",
+        "name": "inject repeat 0.5s",
         "props": [
             {
                 "p": "payload"
@@ -1887,8 +1762,8 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 1730,
-        "y": 560,
+        "x": 1510,
+        "y": 540,
         "wires": [
             [
                 "8ba91e07425409a1"
@@ -1906,7 +1781,7 @@
         "priority": 1,
         "queryType": "update",
         "x": 3740,
-        "y": 1280,
+        "y": 960,
         "wires": []
     },
     {
@@ -1922,7 +1797,7 @@
         "finalize": "",
         "libs": [],
         "x": 3440,
-        "y": 1280,
+        "y": 960,
         "wires": [
             [
                 "d0aa4fbb0ee9ce93"
@@ -1940,7 +1815,7 @@
         "priority": 1,
         "queryType": "update",
         "x": 3740,
-        "y": 1180,
+        "y": 860,
         "wires": []
     },
     {
@@ -1956,7 +1831,7 @@
         "finalize": "",
         "libs": [],
         "x": 3440,
-        "y": 1180,
+        "y": 860,
         "wires": [
             [
                 "cc33ac5142482c8a"
@@ -1974,14 +1849,14 @@
         "priority": 1,
         "queryType": "update",
         "x": 3740,
-        "y": 1060,
+        "y": 780,
         "wires": []
     },
     {
         "id": "5ba93ead7e2702e8",
         "type": "inject",
         "z": "ca325aaf4a15f98c",
-        "name": "",
+        "name": "inject",
         "props": [
             {
                 "p": "payload"
@@ -1998,8 +1873,8 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 530,
-        "y": 720,
+        "x": 510,
+        "y": 1140,
         "wires": [
             [
                 "050e41da6926c88a",
@@ -2011,16 +1886,16 @@
         "id": "91efae4305375d70",
         "type": "function",
         "z": "ca325aaf4a15f98c",
-        "name": "changeUI",
-        "func": "msg.payload = {\n    tab: \"Welcome\",\n    group: {\n        show: [\"Welcome_Login\"],\n        hide: [ \"Welcome_Signup\"],\n    }, \n    tabs:{\n        hide: [\"Welcome\", \"Dashboard\"]\n    }\n}\nreturn msg;",
+        "name": "show Welcome",
+        "func": "msg.payload = {\n    tab: \"Welcome\",\n    tabs:{\n        hide: [\"Welcome\", \"Dashboard\"]\n    }\n}\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1940,
-        "y": 500,
+        "x": 1960,
+        "y": 360,
         "wires": [
             [
                 "18edb5dc835edb4c"
@@ -2031,55 +1906,13 @@
         "id": "18edb5dc835edb4c",
         "type": "ui_ui_control",
         "z": "ca325aaf4a15f98c",
-        "name": "",
+        "name": "show Welcome",
         "events": "change",
-        "x": 2240,
-        "y": 500,
+        "x": 2260,
+        "y": 360,
         "wires": [
             []
         ]
-    },
-    {
-        "id": "a6d5f7a9c6e85614",
-        "type": "change",
-        "z": "ca325aaf4a15f98c",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "user",
-                "pt": "global",
-                "to": "user",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1120,
-        "y": 780,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "fc6afa1d2c77f9a3",
-        "type": "debug",
-        "z": "ca325aaf4a15f98c",
-        "name": "debug 22",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1850,
-        "y": 1340,
-        "wires": []
     },
     {
         "id": "ed6d3bd499be51c7",
@@ -2102,8 +1935,8 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 1780,
-        "y": 1620,
+        "x": 1730,
+        "y": 1220,
         "wires": [
             [
                 "6df6da944e478839"
@@ -2144,7 +1977,7 @@
         "combine": true,
         "blanklabel": "blank",
         "x": 2540,
-        "y": 1520,
+        "y": 1220,
         "wires": [
             []
         ]
@@ -2167,90 +2000,7 @@
         "fontSize": "19",
         "color": "#000000",
         "x": 2560,
-        "y": 1560,
-        "wires": []
-    },
-    {
-        "id": "7b83ad3d92adf979",
-        "type": "debug",
-        "z": "ca325aaf4a15f98c",
-        "name": "debug 23",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 2540,
-        "y": 1600,
-        "wires": []
-    },
-    {
-        "id": "ae4cabf38c484d25",
-        "type": "inject",
-        "z": "ca325aaf4a15f98c",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": true,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 1890,
-        "y": 1980,
-        "wires": [
-            [
-                "414d796848420e76"
-            ]
-        ]
-    },
-    {
-        "id": "414d796848420e76",
-        "type": "firebase-get",
-        "z": "ca325aaf4a15f98c",
-        "name": "",
-        "constraint": {},
-        "database": "e06e2b12d2b78bdf",
-        "outputType": "auto",
-        "passThrough": true,
-        "path": "setting/defaultHumidity",
-        "pathType": "str",
-        "useConstraint": false,
-        "x": 2170,
-        "y": 2000,
-        "wires": [
-            [
-                "d5047de44615ca94"
-            ]
-        ]
-    },
-    {
-        "id": "d5047de44615ca94",
-        "type": "debug",
-        "z": "ca325aaf4a15f98c",
-        "name": "debug 24",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 2310,
-        "y": 2080,
+        "y": 1260,
         "wires": []
     },
     {
@@ -2268,8 +2018,8 @@
         "resendOnRefresh": true,
         "templateScope": "local",
         "className": "",
-        "x": 2560,
-        "y": 580,
+        "x": 2540,
+        "y": 460,
         "wires": [
             []
         ]
@@ -2294,8 +2044,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 2010,
-        "y": 580,
+        "x": 1970,
+        "y": 460,
         "wires": [
             [
                 "e1a2318b5b83bf77"
@@ -2316,8 +2066,8 @@
         "syntax": "mustache",
         "template": "{\"text\":\"MỞ\"}",
         "output": "json",
-        "x": 2280,
-        "y": 560,
+        "x": 2240,
+        "y": 440,
         "wires": [
             [
                 "6151741a3a96d3db"
@@ -2335,13 +2085,108 @@
         "syntax": "mustache",
         "template": "{\"text\":\"ĐÓNG\"}",
         "output": "json",
-        "x": 2280,
-        "y": 600,
+        "x": 2240,
+        "y": 480,
         "wires": [
             [
                 "6151741a3a96d3db"
             ]
         ]
+    },
+    {
+        "id": "9e8bc3506e2117a7",
+        "type": "mqtt out",
+        "z": "ca325aaf4a15f98c",
+        "d": true,
+        "name": "",
+        "topic": "project/userSetDefaultValues",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "e603fe28287a3728",
+        "x": 340,
+        "y": 2140,
+        "wires": []
+    },
+    {
+        "id": "66e950fd468239fc",
+        "type": "mqtt out",
+        "z": "ca325aaf4a15f98c",
+        "d": true,
+        "name": "",
+        "topic": "project/userSetDefaultHumid",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "e603fe28287a3728",
+        "x": 340,
+        "y": 2060,
+        "wires": []
+    },
+    {
+        "id": "1dadd951ce024257",
+        "type": "mqtt out",
+        "z": "ca325aaf4a15f98c",
+        "d": true,
+        "name": "",
+        "topic": "project/userSetDefaultTemp",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "e603fe28287a3728",
+        "x": 340,
+        "y": 1980,
+        "wires": []
+    },
+    {
+        "id": "69e852999f3fb745",
+        "type": "mqtt out",
+        "z": "ca325aaf4a15f98c",
+        "d": true,
+        "name": "",
+        "topic": "project/userChangeAutoMode",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "e603fe28287a3728",
+        "x": 350,
+        "y": 2020,
+        "wires": []
+    },
+    {
+        "id": "4eb8aae9ca78664e",
+        "type": "mqtt out",
+        "z": "ca325aaf4a15f98c",
+        "d": true,
+        "name": "",
+        "topic": "project/userChangeMode",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "18af26a4e9951e61",
+        "x": 330,
+        "y": 2100,
+        "wires": []
     },
     {
         "id": "77229db0388e207c",
