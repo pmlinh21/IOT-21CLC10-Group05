@@ -52,8 +52,8 @@ FirebaseAuth auth;
 FirebaseConfig config;
 
 // Wifi Cafe
-// const char* ssid = "The Simple Cafe";
-// const char* password = "simpleisthebest";
+const char* ssid = "The Simple Cafe";
+const char* password = "simpleisthebest";
 
 // Wifi Lien
 // const char* ssid = "YenLien";
@@ -67,8 +67,8 @@ FirebaseConfig config;
 // const char* ssid = "HCMUS Thu Vien";
 // const char* password = "12345678";
 
-const char* ssid = "Khanh Ngoc";
-const char* password = "Giaquy@@2015pcduc";
+// const char* ssid = "Thuy Phan";
+// const char* password = "linhphan";
 
 const char*  mqttServer = "test.mosquitto.org";
 int port = 1883;
@@ -271,19 +271,26 @@ void loop(){
   while (!Firebase.ready()) {
     Serial.println("Waiting for firebase...");
   };
-  if (Firebase.ready()) {
-    Firebase.getInt(fbdo, F("/setting/autoMode"));
+
+  if (Firebase.ready()){
+    while (!Firebase.getInt(fbdo, F("/setting/autoMode"))){}
     autoMode = fbdo.to<int>();
-    Firebase.getBool(fbdo, FPSTR("/setting/isAuto"));
+
+    while (!Firebase.getBool(fbdo, FPSTR("/setting/isAuto"))){}
     isAuto = fbdo.to<bool>();
-    Firebase.getBool(fbdo, FPSTR("/setting/isOpen"));
+
+    while (!Firebase.getBool(fbdo, FPSTR("/setting/isOpen"))){}
     isOpen = fbdo.to<bool>();
 
-    Firebase.getInt(fbdo, F("/setting/defaultTemperature"));
-    defaultTemperature = fbdo.to<float>();
-    Firebase.getInt(fbdo, F("/setting/defaultHumidity"));
-    defaultHumidity = fbdo.to<float>();
+    while (!Firebase.getInt(fbdo, F("/setting/defaultTemperature"))){}
+    defaultTemperature = fbdo.to<int>();
 
+    while (!Firebase.getInt(fbdo, F("/setting/humidityDefault"))){}
+    defaultHumidity = fbdo.to<int>();
+    
+    Serial.println("Get from firebase: " + String(defaultTemperature) + " " + String(defaultHumidity) + " " +  String(isAuto) + " " + String(autoMode) + " " + String(isOpen));
+    // delay(100);
+    
   }
 
   // read input
@@ -299,19 +306,15 @@ void loop(){
     isHot = false;
     isSafe = true;
     Serial.println("Failed to read from DHT sensor!");
-    sprintf(buffer, "{\"defaultTemperature\":%.0f, \"defaultHumidity\":%.0f, \"temperature\":0, \"humidity\":0, \"isOpen\":%s, \"isRaining\":%s, \"isHot\":%s, \"isSafe\":%s, \"isAuto\":%s, \"autoMode\":%d}", defaultTemperature, defaultHumidity, isOpen ? "true" : "false", isRaining ? "true" : "false", isHot ? "true" : "false", isSafe ? "true" : "false", isAuto ? "true" : "false", autoMode);
+    sprintf(buffer, "{\"temperature\":0, \"humidity\":0, \"isRaining\":%s, \"isAuto\":%s, \"autoMode\":%d}", isRaining ? "true" : "false", isAuto ? "true" : "false", autoMode);
   }
   else {
     isHot = (temperature > defaultTemperature);
     isSafe = (humidity < defaultHumidity);
     if(isSafe) warning = false;
-    sprintf(buffer, "{\"defaultTemperature\":%.0f, \"defaultHumidity\":%.0f, \"temperature\":%.1f, \"humidity\":%.0f, \"isOpen\":%s, \"isRaining\":%s, \"isHot\":%s, \"isSafe\":%s, \"isAuto\":%s, \"autoMode\":%d}", defaultTemperature, defaultHumidity, temperature, humidity, isOpen ? "true" : "false", isRaining ? "true" : "false", isHot ? "true" : "false", isSafe ? "true" : "false", isAuto ? "true" : "false", autoMode);
+    sprintf(buffer, "{\"temperature\":%.1f, \"humidity\":%.0f, \"isRaining\":%s, \"isAuto\":%s, \"autoMode\":%d}", temperature, humidity, isRaining ? "true" : "false", isAuto ? "true" : "false", autoMode);
   }
   // Serial.println(buffer);
-  client.publish("project/data", buffer);
-
-  Serial.println(String(isAuto) + " " + String(autoMode) + " " + String(isHot) + " " + String(isRaining) + " " + String(isOpen) 
-  + " " + String(isSafe) + " " + String(warning)  + " " + String(defaultTemperature) + " " + String(defaultHumidity) );
 
   if (isAuto) {
     if (autoMode == 1) {
@@ -323,7 +326,7 @@ void loop(){
       else if (!isHot && isOpen && !isRaining){
         closeMaiche();
         Firebase.setBool(fbdo, F("/setting/isOpen"), false);
-        isOpen=false;
+        // isOpen=false;
       }
     }
     else if (autoMode == 2) {
@@ -336,15 +339,20 @@ void loop(){
       else if (!isRaining && isOpen){
         closeMaiche();
         Firebase.setBool(fbdo, F("/setting/isOpen"), false);
-        isOpen=false;
+        // isOpen=false;
       }
     }
   }
 
   if(!isSafe && !warning){
+     Serial.println(String(isAuto) + " " + String(autoMode) + " " + String(isHot) + " " + String(isRaining) + " " + String(isOpen) 
+  + " " + String(isSafe) + " " + String(warning) + " " + String(defaultTemperature));
+    Serial.println(String(humidity) + " " + String(defaultHumidity));
     sendHttpRequest(requestHumidityWarning);
     warning = true;
   }
+
+  client.publish("project/data", buffer);
 
   delay(500);
 }
